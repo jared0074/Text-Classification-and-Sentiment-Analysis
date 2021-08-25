@@ -1,0 +1,1455 @@
+<?xml version="1.0" encoding="UTF-8"?><_ROOT_ EMVERSION="15.1" ORIENTATION="HORIZONTAL">
+<Workspace>
+<NODES>
+<NODE CLASS="SASHELP.EMCORE.EXTENSION.CLASS" COMPONENT="FileImport" ID="FIMPORT" X="87" Y="159" DESCRIPTION="File Import" DIAGRAMID="_ROOT_" PARENTID="" TOOLTYPE="SAMPLE" TOOLPREFIX="FIMPORT">
+<PROPERTIES Location="CATALOG" Catalog="SASHELP.EMSAMP.Fimport.SOURCE" ImportType="Local" GuessRows="500" Delimiter="," NameRow="Y" SkipRows="0" MaxRows="1000000" MaxCols="10000" FileType="csv" Role="TRAIN" ForceRun="N" Summarize="N" AdvancedAdvisor="N" RunAction="Train" Component="FileImport" IFileName="C:\Users\jared\Desktop\Musical_Instruments_Reviews.csv" AccessTable="NoTableName" UserID="NoUserID" Password="NoPassword">
+<VariableProperties/>
+<EmVariableAttributes>
+<DELTA Variable="Sentiment" AttributeName="ROLE" AttributeValue="TARGET"/>
+</EmVariableAttributes>
+<EmTargetAttributes/>
+<EmFileProperties>
+<USERTRAINCODE Type="EXTERNAL" Extension="sas">
+<Data/>
+</USERTRAINCODE>
+<VARIABLESETDELTA Type="EXTERNAL" Extension="txt">
+<Data><![CDATA[
+if NAME=&quot;Sentiment&quot; then do;
+ROLE=&quot;TARGET&quot;;
+LEVEL=&quot;NOMINAL&quot;;
+ORDER=&quot;&quot;;
+DROP=&quot;N&quot;;
+end;
+]]>
+</Data>
+</VARIABLESETDELTA>
+<DELTACODE Type="EXTERNAL" Extension="txt">
+<Data><![CDATA[
+if NAME=&quot;Sentiment&quot; then do;
+ROLE=&quot;TARGET&quot;;
+LEVEL=&quot;NOMINAL&quot;;
+ORDER=&quot;&quot;;
+end;
+drop DROP;
+]]>
+</Data>
+</DELTACODE>
+<EMNOTES Type="EXTERNAL" Extension="txt">
+<Data/>
+</EMNOTES>
+</EmFileProperties>
+</PROPERTIES>
+</NODE>
+<NODE CLASS="SASHELP.EMSAMP.EMDPART.CLASS" COMPONENT="Partition" ID="Part" X="245" Y="159" DESCRIPTION="Data Partition" DIAGRAMID="_ROOT_" PARENTID="" TOOLTYPE="SAMPLE" TOOLPREFIX="Part">
+<PROPERTIES Method="DEFAULT" TrainPct="70" ValidatePct="30" TestPct="0" RandomSeed="12345" OutputType="DATA" IntervalDistribution="Y" ClassDistribution="Y" ForceRun="N" RunAction="Train" Component="Partition">
+<VariableProperties/>
+<EmVariableAttributes/>
+<EmTargetAttributes/>
+<EmFileProperties>
+<EMNOTES Type="EXTERNAL" Extension="txt">
+<Data/>
+</EMNOTES>
+</EmFileProperties>
+</PROPERTIES>
+</NODE>
+<NODE CLASS="SASHELP.EMCORE.EXTENSION.CLASS" COMPONENT="TextFilter" ID="TextFilter" X="566" Y="159" DESCRIPTION="Text Filter" DIAGRAMID="_ROOT_" PARENTID="" TOOLTYPE="TM" TOOLPREFIX="TextFilter">
+<PROPERTIES Location="CATALOG" Catalog="SASHELP.EMTXTEXT.FILTER.SOURCE" spellCheck="Y" spellSensitivity="Med" cellWeight="DEFAULT" termWeight="DEFAULT" minDocs="4" maxTerms="." resultTerms="ALL" maxviewTerms="20000" ForceRun="N" RunAction="Train" Component="TextFilter" spellDict="" searchPhrase="" searchVar="" whereDoc="" lastfilternode="" lastparsenode="" synonymImport="" saveSynDS="" spellDS="EMWS1.TextFilter_spellDS" interStopDS="" filters="" interSynDS="">
+<VariableProperties/>
+<EmVariableAttributes/>
+<EmTargetAttributes/>
+<EmFileProperties>
+<USERTRAINCODE Type="EXTERNAL" Extension="sas">
+<Data/>
+</USERTRAINCODE>
+<SYNONYMIMPORT Type="DATA">
+<Data/>
+<Metadata>
+<Variable NAME="term" LABEL="Child Term" LENGTH="256" FORMAT="" TYPE="C"/>
+<Variable NAME="termrole" LABEL="Term Role" LENGTH="256" FORMAT="" TYPE="C"/>
+<Variable NAME="parent" LABEL="Parent Term" LENGTH="256" FORMAT="" TYPE="C"/>
+<Variable NAME="parentrole" LABEL="Parent Role" LENGTH="256" FORMAT="" TYPE="C"/>
+</Metadata>
+</SYNONYMIMPORT>
+<EMNOTES Type="EXTERNAL" Extension="txt">
+<Data/>
+</EMNOTES>
+</EmFileProperties>
+</PROPERTIES>
+</NODE>
+<NODE CLASS="SASHELP.EMCORE.EXTENSION.CLASS" COMPONENT="TextParsing" ID="TextParsing" X="408" Y="159" DESCRIPTION="Text Parsing" DIAGRAMID="_ROOT_" PARENTID="" TOOLTYPE="TM" TOOLPREFIX="TextParsing">
+<PROPERTIES Location="CATALOG" Catalog="SASHELP.EMTXTEXT.PARSE.SOURCE" language="ENGLISH" delimit="Std" bCapitalize="Y" bPartOfSpeech="Y" NounGroups="Y" multiDS="SASHELP.ENG_MULTI" bPatterns="NONE" stopList="SASHELP.ENGSTOP" ignorePOS="'AUX' 'CONJ' 'DET' 'INTERJ' 'PART' 'PREP' 'PRON'" ignoreAttrib="'NUM' 'PUNCT'" bStems="Y" synonymDS="SASHELP.ENGSYNMS" maxviewTerms="20000" ForceRun="N" RunAction="Train" Component="TextParsing" TGConcepts="" TGCategories="" ignoreEntities="" startList="" filterLang="" parseVar="Reviews" NGSettingBeforeCustom="" bPatternsSetting="NONE">
+<VariableProperties/>
+<EmVariableAttributes/>
+<EmTargetAttributes/>
+<EmFileProperties>
+<USERTRAINCODE Type="EXTERNAL" Extension="sas">
+<Data/>
+</USERTRAINCODE>
+<STOPLIST Type="DATA">
+<Data>
+<Obs TERM="'d" ROLE=""/>
+<Obs TERM="'ll" ROLE=""/>
+<Obs TERM="'m" ROLE=""/>
+<Obs TERM="'re" ROLE=""/>
+<Obs TERM="'s" ROLE=""/>
+<Obs TERM="'ve" ROLE=""/>
+<Obs TERM="a" ROLE=""/>
+<Obs TERM="aboard" ROLE=""/>
+<Obs TERM="about" ROLE=""/>
+<Obs TERM="above" ROLE=""/>
+<Obs TERM="according" ROLE=""/>
+<Obs TERM="accordingly" ROLE=""/>
+<Obs TERM="across" ROLE=""/>
+<Obs TERM="actually" ROLE=""/>
+<Obs TERM="after" ROLE=""/>
+<Obs TERM="afterwards" ROLE=""/>
+<Obs TERM="again" ROLE=""/>
+<Obs TERM="against" ROLE=""/>
+<Obs TERM="ago" ROLE=""/>
+<Obs TERM="ah" ROLE=""/>
+<Obs TERM="ain" ROLE=""/>
+<Obs TERM="all" ROLE=""/>
+<Obs TERM="almost" ROLE=""/>
+<Obs TERM="along" ROLE=""/>
+<Obs TERM="alongside" ROLE=""/>
+<Obs TERM="already" ROLE=""/>
+<Obs TERM="also" ROLE=""/>
+<Obs TERM="although" ROLE=""/>
+<Obs TERM="altogether" ROLE=""/>
+<Obs TERM="am" ROLE=""/>
+<Obs TERM="amid" ROLE=""/>
+<Obs TERM="amidst" ROLE=""/>
+<Obs TERM="among" ROLE=""/>
+<Obs TERM="amongst" ROLE=""/>
+<Obs TERM="an" ROLE=""/>
+<Obs TERM="and" ROLE=""/>
+<Obs TERM="another" ROLE=""/>
+<Obs TERM="any" ROLE=""/>
+<Obs TERM="anybody" ROLE=""/>
+<Obs TERM="anyhow" ROLE=""/>
+<Obs TERM="anyone" ROLE=""/>
+<Obs TERM="anyplace" ROLE=""/>
+<Obs TERM="anything" ROLE=""/>
+<Obs TERM="anyway" ROLE=""/>
+<Obs TERM="anyways" ROLE=""/>
+<Obs TERM="anywhere" ROLE=""/>
+<Obs TERM="apart" ROLE=""/>
+<Obs TERM="appreciate" ROLE=""/>
+<Obs TERM="appropriate" ROLE=""/>
+<Obs TERM="are" ROLE=""/>
+<Obs TERM="around" ROLE=""/>
+<Obs TERM="as" ROLE=""/>
+<Obs TERM="aside" ROLE=""/>
+<Obs TERM="ask" ROLE=""/>
+<Obs TERM="asking" ROLE=""/>
+<Obs TERM="associated" ROLE=""/>
+<Obs TERM="at" ROLE=""/>
+<Obs TERM="atop" ROLE=""/>
+<Obs TERM="available" ROLE=""/>
+<Obs TERM="away" ROLE=""/>
+<Obs TERM="b" ROLE=""/>
+<Obs TERM="be" ROLE=""/>
+<Obs TERM="became" ROLE=""/>
+<Obs TERM="because" ROLE=""/>
+<Obs TERM="become" ROLE=""/>
+<Obs TERM="becomes" ROLE=""/>
+<Obs TERM="becoming" ROLE=""/>
+<Obs TERM="been" ROLE=""/>
+<Obs TERM="before" ROLE=""/>
+<Obs TERM="behind" ROLE=""/>
+<Obs TERM="being" ROLE=""/>
+<Obs TERM="believe" ROLE=""/>
+<Obs TERM="below" ROLE=""/>
+<Obs TERM="beneath" ROLE=""/>
+<Obs TERM="beside" ROLE=""/>
+<Obs TERM="besides" ROLE=""/>
+<Obs TERM="between" ROLE=""/>
+<Obs TERM="beyond" ROLE=""/>
+<Obs TERM="both" ROLE=""/>
+<Obs TERM="but" ROLE=""/>
+<Obs TERM="by" ROLE=""/>
+<Obs TERM="c" ROLE=""/>
+<Obs TERM="call" ROLE=""/>
+<Obs TERM="called" ROLE=""/>
+<Obs TERM="came" ROLE=""/>
+<Obs TERM="can" ROLE=""/>
+<Obs TERM="can't" ROLE=""/>
+<Obs TERM="certain" ROLE=""/>
+<Obs TERM="certainly" ROLE=""/>
+<Obs TERM="change" ROLE=""/>
+<Obs TERM="changes" ROLE=""/>
+<Obs TERM="co" ROLE=""/>
+<Obs TERM="com" ROLE=""/>
+<Obs TERM="come" ROLE=""/>
+<Obs TERM="concerning" ROLE=""/>
+<Obs TERM="consequently" ROLE=""/>
+<Obs TERM="consider" ROLE=""/>
+<Obs TERM="considering" ROLE=""/>
+<Obs TERM="corresponding" ROLE=""/>
+<Obs TERM="could" ROLE=""/>
+<Obs TERM="course" ROLE=""/>
+<Obs TERM="currently" ROLE=""/>
+<Obs TERM="d" ROLE=""/>
+<Obs TERM="describe" ROLE=""/>
+<Obs TERM="described" ROLE=""/>
+<Obs TERM="despite" ROLE=""/>
+<Obs TERM="did" ROLE=""/>
+<Obs TERM="didn't" ROLE=""/>
+<Obs TERM="do" ROLE=""/>
+<Obs TERM="does" ROLE=""/>
+<Obs TERM="doesn't" ROLE=""/>
+<Obs TERM="doing" ROLE=""/>
+<Obs TERM="don't" ROLE=""/>
+<Obs TERM="done" ROLE=""/>
+<Obs TERM="during" ROLE=""/>
+<Obs TERM="e" ROLE=""/>
+<Obs TERM="each" ROLE=""/>
+<Obs TERM="edu" ROLE=""/>
+<Obs TERM="eg" ROLE=""/>
+<Obs TERM="either" ROLE=""/>
+<Obs TERM="else" ROLE=""/>
+<Obs TERM="enough" ROLE=""/>
+<Obs TERM="et" ROLE=""/>
+<Obs TERM="etc" ROLE=""/>
+<Obs TERM="etc." ROLE=""/>
+<Obs TERM="even" ROLE=""/>
+<Obs TERM="ever" ROLE=""/>
+<Obs TERM="every" ROLE=""/>
+<Obs TERM="everybody" ROLE=""/>
+<Obs TERM="everyone" ROLE=""/>
+<Obs TERM="everything" ROLE=""/>
+<Obs TERM="everywhere" ROLE=""/>
+<Obs TERM="example" ROLE=""/>
+<Obs TERM="except" ROLE=""/>
+<Obs TERM="f" ROLE=""/>
+<Obs TERM="following" ROLE=""/>
+<Obs TERM="for" ROLE=""/>
+<Obs TERM="former" ROLE=""/>
+<Obs TERM="formerly" ROLE=""/>
+<Obs TERM="forth" ROLE=""/>
+<Obs TERM="from" ROLE=""/>
+<Obs TERM="furthermore" ROLE=""/>
+<Obs TERM="g" ROLE=""/>
+<Obs TERM="generally" ROLE=""/>
+<Obs TERM="get" ROLE=""/>
+<Obs TERM="gets" ROLE=""/>
+<Obs TERM="getting" ROLE=""/>
+<Obs TERM="give" ROLE=""/>
+<Obs TERM="given" ROLE=""/>
+<Obs TERM="gives" ROLE=""/>
+<Obs TERM="go" ROLE=""/>
+<Obs TERM="goes" ROLE=""/>
+<Obs TERM="going" ROLE=""/>
+<Obs TERM="gone" ROLE=""/>
+<Obs TERM="got" ROLE=""/>
+<Obs TERM="gotten" ROLE=""/>
+<Obs TERM="greetings" ROLE=""/>
+<Obs TERM="h" ROLE=""/>
+<Obs TERM="had" ROLE=""/>
+<Obs TERM="hadn't" ROLE=""/>
+<Obs TERM="hardly" ROLE=""/>
+<Obs TERM="has" ROLE=""/>
+<Obs TERM="have" ROLE=""/>
+<Obs TERM="he" ROLE=""/>
+<Obs TERM="he'd" ROLE=""/>
+<Obs TERM="he's" ROLE=""/>
+<Obs TERM="hello" ROLE=""/>
+<Obs TERM="hence" ROLE=""/>
+<Obs TERM="her" ROLE=""/>
+<Obs TERM="here" ROLE=""/>
+<Obs TERM="hereafter" ROLE=""/>
+<Obs TERM="hereby" ROLE=""/>
+<Obs TERM="herein" ROLE=""/>
+<Obs TERM="hereupon" ROLE=""/>
+<Obs TERM="hers" ROLE=""/>
+<Obs TERM="herself" ROLE=""/>
+<Obs TERM="hi" ROLE=""/>
+<Obs TERM="him" ROLE=""/>
+<Obs TERM="himself" ROLE=""/>
+<Obs TERM="his" ROLE=""/>
+<Obs TERM="hither" ROLE=""/>
+<Obs TERM="hopefully" ROLE=""/>
+<Obs TERM="how" ROLE=""/>
+<Obs TERM="howbeit" ROLE=""/>
+<Obs TERM="however" ROLE=""/>
+<Obs TERM="i" ROLE=""/>
+<Obs TERM="i'd" ROLE=""/>
+<Obs TERM="i'm" ROLE=""/>
+<Obs TERM="ie" ROLE=""/>
+<Obs TERM="if" ROLE=""/>
+<Obs TERM="in" ROLE=""/>
+<Obs TERM="inasmuch" ROLE=""/>
+<Obs TERM="indeed" ROLE=""/>
+<Obs TERM="inside" ROLE=""/>
+<Obs TERM="insofar" ROLE=""/>
+<Obs TERM="instead" ROLE=""/>
+<Obs TERM="into" ROLE=""/>
+<Obs TERM="is" ROLE=""/>
+<Obs TERM="isn't" ROLE=""/>
+<Obs TERM="it" ROLE=""/>
+<Obs TERM="it's" ROLE=""/>
+<Obs TERM="its" ROLE=""/>
+<Obs TERM="itself" ROLE=""/>
+<Obs TERM="j" ROLE=""/>
+<Obs TERM="just" ROLE=""/>
+<Obs TERM="k" ROLE=""/>
+<Obs TERM="l" ROLE=""/>
+<Obs TERM="least" ROLE=""/>
+<Obs TERM="lest" ROLE=""/>
+<Obs TERM="let" ROLE=""/>
+<Obs TERM="let's" ROLE=""/>
+<Obs TERM="like" ROLE=""/>
+<Obs TERM="ll" ROLE=""/>
+<Obs TERM="m" ROLE=""/>
+<Obs TERM="ma'am" ROLE=""/>
+<Obs TERM="madam" ROLE=""/>
+<Obs TERM="made" ROLE=""/>
+<Obs TERM="make" ROLE=""/>
+<Obs TERM="many" ROLE=""/>
+<Obs TERM="may" ROLE=""/>
+<Obs TERM="maybe" ROLE=""/>
+<Obs TERM="me" ROLE=""/>
+<Obs TERM="meanwhile" ROLE=""/>
+<Obs TERM="merely" ROLE=""/>
+<Obs TERM="might" ROLE=""/>
+<Obs TERM="mine" ROLE=""/>
+<Obs TERM="minus" ROLE=""/>
+<Obs TERM="more" ROLE=""/>
+<Obs TERM="moreover" ROLE=""/>
+<Obs TERM="most" ROLE=""/>
+<Obs TERM="mr" ROLE=""/>
+<Obs TERM="mr." ROLE=""/>
+<Obs TERM="mrs" ROLE=""/>
+<Obs TERM="mrs." ROLE=""/>
+<Obs TERM="ms" ROLE=""/>
+<Obs TERM="ms." ROLE=""/>
+<Obs TERM="much" ROLE=""/>
+<Obs TERM="must" ROLE=""/>
+<Obs TERM="my" ROLE=""/>
+<Obs TERM="myself" ROLE=""/>
+<Obs TERM="n" ROLE=""/>
+<Obs TERM="n't" ROLE=""/>
+<Obs TERM="name" ROLE=""/>
+<Obs TERM="namely" ROLE=""/>
+<Obs TERM="nd" ROLE=""/>
+<Obs TERM="near" ROLE=""/>
+<Obs TERM="need" ROLE=""/>
+<Obs TERM="neither" ROLE=""/>
+<Obs TERM="never" ROLE=""/>
+<Obs TERM="nevertheless" ROLE=""/>
+<Obs TERM="new" ROLE=""/>
+<Obs TERM="no" ROLE=""/>
+<Obs TERM="nobody" ROLE=""/>
+<Obs TERM="non" ROLE=""/>
+<Obs TERM="none" ROLE=""/>
+<Obs TERM="nonesuch" ROLE=""/>
+<Obs TERM="nonetheless" ROLE=""/>
+<Obs TERM="noone" ROLE=""/>
+<Obs TERM="nor" ROLE=""/>
+<Obs TERM="normally" ROLE=""/>
+<Obs TERM="not" ROLE=""/>
+<Obs TERM="nothing" ROLE=""/>
+<Obs TERM="notwithstand" ROLE=""/>
+<Obs TERM="now" ROLE=""/>
+<Obs TERM="o" ROLE=""/>
+<Obs TERM="obviously" ROLE=""/>
+<Obs TERM="of" ROLE=""/>
+<Obs TERM="off" ROLE=""/>
+<Obs TERM="often" ROLE=""/>
+<Obs TERM="oh" ROLE=""/>
+<Obs TERM="ok" ROLE=""/>
+<Obs TERM="okay" ROLE=""/>
+<Obs TERM="on" ROLE=""/>
+<Obs TERM="once" ROLE=""/>
+<Obs TERM="one" ROLE=""/>
+<Obs TERM="one's" ROLE=""/>
+<Obs TERM="only" ROLE=""/>
+<Obs TERM="onto" ROLE=""/>
+<Obs TERM="or" ROLE=""/>
+<Obs TERM="other" ROLE=""/>
+<Obs TERM="others" ROLE=""/>
+<Obs TERM="ought" ROLE=""/>
+<Obs TERM="our" ROLE=""/>
+<Obs TERM="ours" ROLE=""/>
+<Obs TERM="ourselves" ROLE=""/>
+<Obs TERM="out" ROLE=""/>
+<Obs TERM="over" ROLE=""/>
+<Obs TERM="own" ROLE=""/>
+<Obs TERM="p" ROLE=""/>
+<Obs TERM="part" ROLE=""/>
+<Obs TERM="per" ROLE=""/>
+<Obs TERM="perhaps" ROLE=""/>
+<Obs TERM="please" ROLE=""/>
+<Obs TERM="plus" ROLE=""/>
+<Obs TERM="possible" ROLE=""/>
+<Obs TERM="presumably" ROLE=""/>
+<Obs TERM="probably" ROLE=""/>
+<Obs TERM="provide" ROLE=""/>
+<Obs TERM="provides" ROLE=""/>
+<Obs TERM="put" ROLE=""/>
+<Obs TERM="q" ROLE=""/>
+<Obs TERM="que" ROLE=""/>
+<Obs TERM="quite" ROLE=""/>
+<Obs TERM="qv" ROLE=""/>
+<Obs TERM="r" ROLE=""/>
+<Obs TERM="rather" ROLE=""/>
+<Obs TERM="rd" ROLE=""/>
+<Obs TERM="re" ROLE=""/>
+<Obs TERM="really" ROLE=""/>
+<Obs TERM="reasonably" ROLE=""/>
+<Obs TERM="regard" ROLE=""/>
+<Obs TERM="regarding" ROLE=""/>
+<Obs TERM="regardless" ROLE=""/>
+<Obs TERM="regards" ROLE=""/>
+<Obs TERM="regularly" ROLE=""/>
+<Obs TERM="relatively" ROLE=""/>
+<Obs TERM="respect" ROLE=""/>
+<Obs TERM="respectively" ROLE=""/>
+<Obs TERM="s" ROLE=""/>
+<Obs TERM="said" ROLE=""/>
+<Obs TERM="same" ROLE=""/>
+<Obs TERM="say" ROLE=""/>
+<Obs TERM="saying" ROLE=""/>
+<Obs TERM="says" ROLE=""/>
+<Obs TERM="secondly" ROLE=""/>
+<Obs TERM="see" ROLE=""/>
+<Obs TERM="seem" ROLE=""/>
+<Obs TERM="seemed" ROLE=""/>
+<Obs TERM="seeming" ROLE=""/>
+<Obs TERM="seems" ROLE=""/>
+<Obs TERM="self" ROLE=""/>
+<Obs TERM="selves" ROLE=""/>
+<Obs TERM="send" ROLE=""/>
+<Obs TERM="sensible" ROLE=""/>
+<Obs TERM="sent" ROLE=""/>
+<Obs TERM="seriously" ROLE=""/>
+<Obs TERM="shall" ROLE=""/>
+<Obs TERM="she" ROLE=""/>
+<Obs TERM="she'd" ROLE=""/>
+<Obs TERM="should" ROLE=""/>
+<Obs TERM="since" ROLE=""/>
+<Obs TERM="sir" ROLE=""/>
+<Obs TERM="so" ROLE=""/>
+<Obs TERM="some" ROLE=""/>
+<Obs TERM="somebody" ROLE=""/>
+<Obs TERM="somehow" ROLE=""/>
+<Obs TERM="someone" ROLE=""/>
+<Obs TERM="someplace" ROLE=""/>
+<Obs TERM="something" ROLE=""/>
+<Obs TERM="sometime" ROLE=""/>
+<Obs TERM="sometimes" ROLE=""/>
+<Obs TERM="someway" ROLE=""/>
+<Obs TERM="somewhat" ROLE=""/>
+<Obs TERM="somewhere" ROLE=""/>
+<Obs TERM="soon" ROLE=""/>
+<Obs TERM="sorry" ROLE=""/>
+<Obs TERM="specified" ROLE=""/>
+<Obs TERM="specify" ROLE=""/>
+<Obs TERM="specifying" ROLE=""/>
+<Obs TERM="still" ROLE=""/>
+<Obs TERM="sub" ROLE=""/>
+<Obs TERM="such" ROLE=""/>
+<Obs TERM="sup" ROLE=""/>
+<Obs TERM="sure" ROLE=""/>
+<Obs TERM="surely" ROLE=""/>
+<Obs TERM="t" ROLE=""/>
+<Obs TERM="take" ROLE=""/>
+<Obs TERM="taken" ROLE=""/>
+<Obs TERM="tell" ROLE=""/>
+<Obs TERM="tend" ROLE=""/>
+<Obs TERM="tends" ROLE=""/>
+<Obs TERM="th" ROLE=""/>
+<Obs TERM="than" ROLE=""/>
+<Obs TERM="thank" ROLE=""/>
+<Obs TERM="thanks" ROLE=""/>
+<Obs TERM="thanx" ROLE=""/>
+<Obs TERM="that" ROLE=""/>
+<Obs TERM="that's" ROLE=""/>
+<Obs TERM="thats" ROLE=""/>
+<Obs TERM="the" ROLE=""/>
+<Obs TERM="their" ROLE=""/>
+<Obs TERM="theirs" ROLE=""/>
+<Obs TERM="them" ROLE=""/>
+<Obs TERM="themselves" ROLE=""/>
+<Obs TERM="then" ROLE=""/>
+<Obs TERM="thence" ROLE=""/>
+<Obs TERM="there" ROLE=""/>
+<Obs TERM="there's" ROLE=""/>
+<Obs TERM="thereafter" ROLE=""/>
+<Obs TERM="thereby" ROLE=""/>
+<Obs TERM="therefore" ROLE=""/>
+<Obs TERM="therein" ROLE=""/>
+<Obs TERM="theres" ROLE=""/>
+<Obs TERM="thereupon" ROLE=""/>
+<Obs TERM="these" ROLE=""/>
+<Obs TERM="they" ROLE=""/>
+<Obs TERM="they're" ROLE=""/>
+<Obs TERM="think" ROLE=""/>
+<Obs TERM="this" ROLE=""/>
+<Obs TERM="thorough" ROLE=""/>
+<Obs TERM="thoroughly" ROLE=""/>
+<Obs TERM="those" ROLE=""/>
+<Obs TERM="though" ROLE=""/>
+<Obs TERM="through" ROLE=""/>
+<Obs TERM="throughout" ROLE=""/>
+<Obs TERM="thru" ROLE=""/>
+<Obs TERM="thus" ROLE=""/>
+<Obs TERM="thusly" ROLE=""/>
+<Obs TERM="thx" ROLE=""/>
+<Obs TERM="till" ROLE=""/>
+<Obs TERM="to" ROLE=""/>
+<Obs TERM="together" ROLE=""/>
+<Obs TERM="too" ROLE=""/>
+<Obs TERM="took" ROLE=""/>
+<Obs TERM="toward" ROLE=""/>
+<Obs TERM="towards" ROLE=""/>
+<Obs TERM="tried" ROLE=""/>
+<Obs TERM="tries" ROLE=""/>
+<Obs TERM="truly" ROLE=""/>
+<Obs TERM="try" ROLE=""/>
+<Obs TERM="trying" ROLE=""/>
+<Obs TERM="two" ROLE=""/>
+<Obs TERM="u" ROLE=""/>
+<Obs TERM="un" ROLE=""/>
+<Obs TERM="under" ROLE=""/>
+<Obs TERM="underneath" ROLE=""/>
+<Obs TERM="unfortunately" ROLE=""/>
+<Obs TERM="unless" ROLE=""/>
+<Obs TERM="unlike" ROLE=""/>
+<Obs TERM="until" ROLE=""/>
+<Obs TERM="unto" ROLE=""/>
+<Obs TERM="up" ROLE=""/>
+<Obs TERM="upon" ROLE=""/>
+<Obs TERM="us" ROLE=""/>
+<Obs TERM="use" ROLE=""/>
+<Obs TERM="used" ROLE=""/>
+<Obs TERM="useful" ROLE=""/>
+<Obs TERM="uses" ROLE=""/>
+<Obs TERM="using" ROLE=""/>
+<Obs TERM="usually" ROLE=""/>
+<Obs TERM="uucp" ROLE=""/>
+<Obs TERM="v" ROLE=""/>
+<Obs TERM="various" ROLE=""/>
+<Obs TERM="ve" ROLE=""/>
+<Obs TERM="very" ROLE=""/>
+<Obs TERM="via" ROLE=""/>
+<Obs TERM="viz" ROLE=""/>
+<Obs TERM="vs" ROLE=""/>
+<Obs TERM="w" ROLE=""/>
+<Obs TERM="was" ROLE=""/>
+<Obs TERM="wasn't" ROLE=""/>
+<Obs TERM="way" ROLE=""/>
+<Obs TERM="we" ROLE=""/>
+<Obs TERM="we'll" ROLE=""/>
+<Obs TERM="welcome" ROLE=""/>
+<Obs TERM="went" ROLE=""/>
+<Obs TERM="were" ROLE=""/>
+<Obs TERM="what" ROLE=""/>
+<Obs TERM="whatever" ROLE=""/>
+<Obs TERM="when" ROLE=""/>
+<Obs TERM="whence" ROLE=""/>
+<Obs TERM="where" ROLE=""/>
+<Obs TERM="whereafter" ROLE=""/>
+<Obs TERM="whereas" ROLE=""/>
+<Obs TERM="whereby" ROLE=""/>
+<Obs TERM="wherein" ROLE=""/>
+<Obs TERM="whereupon" ROLE=""/>
+<Obs TERM="wherever" ROLE=""/>
+<Obs TERM="wherewithall" ROLE=""/>
+<Obs TERM="whether" ROLE=""/>
+<Obs TERM="which" ROLE=""/>
+<Obs TERM="whichever" ROLE=""/>
+<Obs TERM="while" ROLE=""/>
+<Obs TERM="whilst" ROLE=""/>
+<Obs TERM="whither" ROLE=""/>
+<Obs TERM="who" ROLE=""/>
+<Obs TERM="whoever" ROLE=""/>
+<Obs TERM="whole" ROLE=""/>
+<Obs TERM="whom" ROLE=""/>
+<Obs TERM="whomever" ROLE=""/>
+<Obs TERM="whose" ROLE=""/>
+<Obs TERM="whosoever" ROLE=""/>
+<Obs TERM="why" ROLE=""/>
+<Obs TERM="will" ROLE=""/>
+<Obs TERM="willing" ROLE=""/>
+<Obs TERM="with" ROLE=""/>
+<Obs TERM="withal" ROLE=""/>
+<Obs TERM="within" ROLE=""/>
+<Obs TERM="without" ROLE=""/>
+<Obs TERM="won" ROLE=""/>
+<Obs TERM="won't" ROLE=""/>
+<Obs TERM="wonder" ROLE=""/>
+<Obs TERM="would" ROLE=""/>
+<Obs TERM="wouldn't" ROLE=""/>
+<Obs TERM="x" ROLE=""/>
+<Obs TERM="y" ROLE=""/>
+<Obs TERM="y'all" ROLE=""/>
+<Obs TERM="yet" ROLE=""/>
+<Obs TERM="you" ROLE=""/>
+<Obs TERM="you'll" ROLE=""/>
+<Obs TERM="you're" ROLE=""/>
+<Obs TERM="you've" ROLE=""/>
+<Obs TERM="your" ROLE=""/>
+<Obs TERM="yours" ROLE=""/>
+<Obs TERM="yourself" ROLE=""/>
+<Obs TERM="yourselves" ROLE=""/>
+<Obs TERM="z" ROLE=""/>
+</Data>
+<Metadata>
+<Variable NAME="term" LABEL="Term" LENGTH="256" FORMAT="$256." TYPE="C"/>
+<Variable NAME="role" LABEL="Role" LENGTH="256" FORMAT="" TYPE="C"/>
+</Metadata>
+</STOPLIST>
+<STARTLIST Type="DATA">
+<Data/>
+<Metadata>
+<Variable NAME="term" LABEL="Term" LENGTH="256" FORMAT="" TYPE="C"/>
+<Variable NAME="role" LABEL="Role" LENGTH="256" FORMAT="" TYPE="C"/>
+</Metadata>
+</STARTLIST>
+<MULTIDS Type="DATA">
+<Data>
+<Obs TERM="a bit" ROLE="Adv" NUMDOCS="8"/>
+<Obs TERM="a fortiori" ROLE="Adv" NUMDOCS="18"/>
+<Obs TERM="a lot" ROLE="Adv" NUMDOCS="89"/>
+<Obs TERM="a lot of" ROLE="Adj" NUMDOCS="47"/>
+<Obs TERM="a posteriori" ROLE="Adj" NUMDOCS="40"/>
+<Obs TERM="a priori" ROLE="Adj" NUMDOCS="24"/>
+<Obs TERM="according to" ROLE="Prep" NUMDOCS="5385"/>
+<Obs TERM="ad hoc" ROLE="Adj" NUMDOCS="446"/>
+<Obs TERM="ad interim" ROLE="Adv" NUMDOCS="9"/>
+<Obs TERM="ahead of" ROLE="Prep" NUMDOCS="107"/>
+<Obs TERM="all the time" ROLE="Adv" NUMDOCS="20"/>
+<Obs TERM="along with" ROLE="Prep" NUMDOCS="319"/>
+<Obs TERM="any moment" ROLE="Adv" NUMDOCS="56"/>
+<Obs TERM="any second" ROLE="Adv" NUMDOCS="2"/>
+<Obs TERM="apart from" ROLE="Prep" NUMDOCS="567"/>
+<Obs TERM="as a result of" ROLE="Prep" NUMDOCS="2190"/>
+<Obs TERM="as a rule" ROLE="Adv" NUMDOCS="192"/>
+<Obs TERM="as far as" ROLE="Prep" NUMDOCS="1377"/>
+<Obs TERM="as for" ROLE="Prep" NUMDOCS="507"/>
+<Obs TERM="as if" ROLE="Conj" NUMDOCS="216"/>
+<Obs TERM="as in" ROLE="Prep" NUMDOCS="795"/>
+<Obs TERM="as long as" ROLE="Conj" NUMDOCS="634"/>
+<Obs TERM="as many as" ROLE="Adv" NUMDOCS="25"/>
+<Obs TERM="as of" ROLE="Prep" NUMDOCS="638"/>
+<Obs TERM="as one" ROLE="Adv" NUMDOCS="517"/>
+<Obs TERM="as per" ROLE="Prep" NUMDOCS="87"/>
+<Obs TERM="as regards" ROLE="Prep" NUMDOCS="6167"/>
+<Obs TERM="as soon as" ROLE="Conj" NUMDOCS="2116"/>
+<Obs TERM="as though" ROLE="Conj" NUMDOCS="31"/>
+<Obs TERM="as to" ROLE="Prep" NUMDOCS="2560"/>
+<Obs TERM="as well" ROLE="Adv" NUMDOCS="379"/>
+<Obs TERM="as well as" ROLE="Conj" NUMDOCS="4490"/>
+<Obs TERM="as yet" ROLE="Adv" NUMDOCS="113"/>
+<Obs TERM="aside from" ROLE="Prep" NUMDOCS="18"/>
+<Obs TERM="assuming that" ROLE="Conj" NUMDOCS="78"/>
+<Obs TERM="at all" ROLE="Adv" NUMDOCS="1293"/>
+<Obs TERM="at any rate" ROLE="Adv" NUMDOCS="34"/>
+<Obs TERM="at least one" ROLE="Adj" NUMDOCS="1427"/>
+<Obs TERM="at once" ROLE="Adv" NUMDOCS="55"/>
+<Obs TERM="at the expense of" ROLE="Prep" NUMDOCS="163"/>
+<Obs TERM="at variance with" ROLE="Prep" NUMDOCS="22"/>
+<Obs TERM="away from" ROLE="Prep" NUMDOCS="262"/>
+<Obs TERM="back of" ROLE="Prep" NUMDOCS="104"/>
+<Obs TERM="bear up" ROLE="Verb" NUMDOCS="6"/>
+<Obs TERM="because of" ROLE="Prep" NUMDOCS="1502"/>
+<Obs TERM="best known" ROLE="Adj" NUMDOCS="8"/>
+<Obs TERM="black and white" ROLE="Adj" NUMDOCS="50"/>
+<Obs TERM="bona fide" ROLE="Adj" NUMDOCS="41"/>
+<Obs TERM="break up" ROLE="Verb" NUMDOCS="12"/>
+<Obs TERM="bring about" ROLE="Verb" NUMDOCS="291"/>
+<Obs TERM="bring up" ROLE="Verb" NUMDOCS="15"/>
+<Obs TERM="build up" ROLE="Verb" NUMDOCS="145"/>
+<Obs TERM="but for" ROLE="Prep" NUMDOCS="149"/>
+<Obs TERM="by dint of" ROLE="Prep" NUMDOCS="8"/>
+<Obs TERM="by itself" ROLE="Adv" NUMDOCS="101"/>
+<Obs TERM="by means of" ROLE="Prep" NUMDOCS="2404"/>
+<Obs TERM="by proxy" ROLE="Adv" NUMDOCS="5"/>
+<Obs TERM="by reason of" ROLE="Prep" NUMDOCS="709"/>
+<Obs TERM="by the way" ROLE="Adv" NUMDOCS="16"/>
+<Obs TERM="by virtue of" ROLE="Prep" NUMDOCS="1069"/>
+<Obs TERM="by way of" ROLE="Prep" NUMDOCS="2127"/>
+<Obs TERM="carry on" ROLE="Verb" NUMDOCS="132"/>
+<Obs TERM="carry out" ROLE="Verb" NUMDOCS="2635"/>
+<Obs TERM="carry through" ROLE="Verb" NUMDOCS="13"/>
+<Obs TERM="catch on" ROLE="Verb" NUMDOCS="19"/>
+<Obs TERM="central african" ROLE="Adj" NUMDOCS="8"/>
+<Obs TERM="clean up" ROLE="Verb" NUMDOCS="10"/>
+<Obs TERM="clear up" ROLE="Verb" NUMDOCS="2"/>
+<Obs TERM="close by" ROLE="Adv" NUMDOCS="10"/>
+<Obs TERM="close to" ROLE="Adv" NUMDOCS="547"/>
+<Obs TERM="come about" ROLE="Verb" NUMDOCS="6"/>
+<Obs TERM="come in" ROLE="Verb" NUMDOCS="31"/>
+<Obs TERM="come on" ROLE="Verb" NUMDOCS="11"/>
+<Obs TERM="considering that" ROLE="Conj" NUMDOCS="225"/>
+<Obs TERM="costa rican" ROLE="Adj" NUMDOCS="3"/>
+<Obs TERM="cover up" ROLE="Verb" NUMDOCS="26"/>
+<Obs TERM="cut off" ROLE="Verb" NUMDOCS="51"/>
+<Obs TERM="dare to" ROLE="Aux" NUMDOCS="2"/>
+<Obs TERM="dark blue" ROLE="Adj" NUMDOCS="7"/>
+<Obs TERM="de facto" ROLE="Adv" NUMDOCS="123"/>
+<Obs TERM="de jure" ROLE="Adv" NUMDOCS="35"/>
+<Obs TERM="devoid of" ROLE="Prep" NUMDOCS="27"/>
+<Obs TERM="draw down" ROLE="Verb" NUMDOCS="2"/>
+<Obs TERM="due to" ROLE="Prep" NUMDOCS="2584"/>
+<Obs TERM="east german" ROLE="Adj" NUMDOCS="2"/>
+<Obs TERM="edge in" ROLE="Verb" NUMDOCS="7"/>
+<Obs TERM="egg on" ROLE="Verb" NUMDOCS="2"/>
+<Obs TERM="en bloc" ROLE="Adv" NUMDOCS="7"/>
+<Obs TERM="en masse" ROLE="Adv" NUMDOCS="2"/>
+<Obs TERM="en route" ROLE="Adv" NUMDOCS="67"/>
+<Obs TERM="et al." ROLE="Abbr" NUMDOCS="71"/>
+<Obs TERM="et cetera" ROLE="Adv" NUMDOCS="9"/>
+<Obs TERM="even if" ROLE="Conj" NUMDOCS="1021"/>
+<Obs TERM="even though" ROLE="Conj" NUMDOCS="438"/>
+<Obs TERM="ever expanding" ROLE="Adj" NUMDOCS="2"/>
+<Obs TERM="ex officio" ROLE="Adv" NUMDOCS="32"/>
+<Obs TERM="ex parte" ROLE="Adj" NUMDOCS="3"/>
+<Obs TERM="except for" ROLE="Prep" NUMDOCS="1201"/>
+<Obs TERM="exclusive of" ROLE="Prep" NUMDOCS="66"/>
+<Obs TERM="fall away" ROLE="Verb" NUMDOCS="2"/>
+<Obs TERM="fall back" ROLE="Verb" NUMDOCS="21"/>
+<Obs TERM="fill in" ROLE="Verb" NUMDOCS="73"/>
+<Obs TERM="filled up" ROLE="Adj" NUMDOCS="7"/>
+<Obs TERM="find out" ROLE="Verb" NUMDOCS="65"/>
+<Obs TERM="fine tune" ROLE="Verb" NUMDOCS="2"/>
+<Obs TERM="fit in" ROLE="Verb" NUMDOCS="21"/>
+<Obs TERM="for all that" ROLE="Conj" NUMDOCS="4"/>
+<Obs TERM="for sake of" ROLE="Prep" NUMDOCS="2"/>
+<Obs TERM="for the sake of" ROLE="Prep" NUMDOCS="301"/>
+<Obs TERM="for want of" ROLE="Prep" NUMDOCS="14"/>
+<Obs TERM="give away" ROLE="Verb" NUMDOCS="3"/>
+<Obs TERM="give in" ROLE="Verb" NUMDOCS="7"/>
+<Obs TERM="give up" ROLE="Verb" NUMDOCS="33"/>
+<Obs TERM="given that" ROLE="Conj" NUMDOCS="828"/>
+<Obs TERM="go ahead" ROLE="Verb" NUMDOCS="22"/>
+<Obs TERM="granting that" ROLE="Conj" NUMDOCS="5"/>
+<Obs TERM="great deal" ROLE="Adv" NUMDOCS="46"/>
+<Obs TERM="grow up" ROLE="Verb" NUMDOCS="3"/>
+<Obs TERM="hand out" ROLE="Verb" NUMDOCS="2"/>
+<Obs TERM="hand over" ROLE="Verb" NUMDOCS="25"/>
+<Obs TERM="high income" ROLE="Adj" NUMDOCS="7"/>
+<Obs TERM="high quality" ROLE="Adj" NUMDOCS="442"/>
+<Obs TERM="hold back" ROLE="Verb" NUMDOCS="41"/>
+<Obs TERM="hold up" ROLE="Verb" NUMDOCS="8"/>
+<Obs TERM="hoped for" ROLE="Adj" NUMDOCS="6"/>
+<Obs TERM="how many" ROLE="Pron" NUMDOCS="64"/>
+<Obs TERM="how much" ROLE="Pron" NUMDOCS="69"/>
+<Obs TERM="in absentia" ROLE="Adv" NUMDOCS="12"/>
+<Obs TERM="in accordance with" ROLE="Prep" NUMDOCS="14620"/>
+<Obs TERM="in addition" ROLE="Adv" NUMDOCS="2629"/>
+<Obs TERM="in addition to" ROLE="Prep" NUMDOCS="2055"/>
+<Obs TERM="in aid of" ROLE="Prep" NUMDOCS="3"/>
+<Obs TERM="in case" ROLE="Conj" NUMDOCS="443"/>
+<Obs TERM="in case of" ROLE="Prep" NUMDOCS="1175"/>
+<Obs TERM="in charge of" ROLE="Prep" NUMDOCS="341"/>
+<Obs TERM="in common with" ROLE="Prep" NUMDOCS="57"/>
+<Obs TERM="in comparison with" ROLE="Prep" NUMDOCS="206"/>
+<Obs TERM="in compliance with" ROLE="Prep" NUMDOCS="1068"/>
+<Obs TERM="in conformity with" ROLE="Prep" NUMDOCS="1462"/>
+<Obs TERM="in consequence of" ROLE="Prep" NUMDOCS="48"/>
+<Obs TERM="in contact with" ROLE="Prep" NUMDOCS="230"/>
+<Obs TERM="in exchange for" ROLE="Prep" NUMDOCS="64"/>
+<Obs TERM="in favour of" ROLE="Prep" NUMDOCS="810"/>
+<Obs TERM="in front" ROLE="Adv" NUMDOCS="18"/>
+<Obs TERM="in front of" ROLE="Prep" NUMDOCS="105"/>
+<Obs TERM="in general" ROLE="Adv" NUMDOCS="1221"/>
+<Obs TERM="in heat" ROLE="Adv" NUMDOCS="4"/>
+<Obs TERM="in lieu of" ROLE="Prep" NUMDOCS="67"/>
+<Obs TERM="in light of" ROLE="Prep" NUMDOCS="242"/>
+<Obs TERM="in line with" ROLE="Prep" NUMDOCS="1984"/>
+<Obs TERM="in need of" ROLE="Prep" NUMDOCS="106"/>
+<Obs TERM="in order for" ROLE="Conj" NUMDOCS="301"/>
+<Obs TERM="in order that" ROLE="Conj" NUMDOCS="334"/>
+<Obs TERM="in particular" ROLE="Adv" NUMDOCS="18416"/>
+<Obs TERM="in place of" ROLE="Prep" NUMDOCS="329"/>
+<Obs TERM="in position" ROLE="Adv" NUMDOCS="60"/>
+<Obs TERM="in process of" ROLE="Prep" NUMDOCS="5"/>
+<Obs TERM="in pursuit" ROLE="Adv" NUMDOCS="75"/>
+<Obs TERM="in re" ROLE="Prep" NUMDOCS="2"/>
+<Obs TERM="in reference to" ROLE="Prep" NUMDOCS="21"/>
+<Obs TERM="in regard to" ROLE="Prep" NUMDOCS="218"/>
+<Obs TERM="in relation to" ROLE="Prep" NUMDOCS="3122"/>
+<Obs TERM="in respect of" ROLE="Prep" NUMDOCS="6422"/>
+<Obs TERM="in respect to" ROLE="Prep" NUMDOCS="72"/>
+<Obs TERM="in return of" ROLE="Prep" NUMDOCS="3"/>
+<Obs TERM="in search of" ROLE="Prep" NUMDOCS="8"/>
+<Obs TERM="in situ" ROLE="Adv" NUMDOCS="63"/>
+<Obs TERM="in spite of" ROLE="Prep" NUMDOCS="190"/>
+<Obs TERM="in that" ROLE="Conj" NUMDOCS="3907"/>
+<Obs TERM="in the event that" ROLE="Conj" NUMDOCS="476"/>
+<Obs TERM="in the face of" ROLE="Prep" NUMDOCS="100"/>
+<Obs TERM="in the interim" ROLE="Adv" NUMDOCS="24"/>
+<Obs TERM="in the interval" ROLE="Adv" NUMDOCS="22"/>
+<Obs TERM="in the light of" ROLE="Prep" NUMDOCS="2985"/>
+<Obs TERM="in the process of" ROLE="Prep" NUMDOCS="358"/>
+<Obs TERM="in the raw" ROLE="Adv" NUMDOCS="64"/>
+<Obs TERM="in use" ROLE="Adv" NUMDOCS="344"/>
+<Obs TERM="in vacuo" ROLE="Adv" NUMDOCS="9"/>
+<Obs TERM="in view of" ROLE="Prep" NUMDOCS="2309"/>
+<Obs TERM="in vitro" ROLE="Adj" NUMDOCS="64"/>
+<Obs TERM="inasmuch as" ROLE="Conj" NUMDOCS="118"/>
+<Obs TERM="inside of" ROLE="Prep" NUMDOCS="47"/>
+<Obs TERM="insofar as" ROLE="Conj" NUMDOCS="683"/>
+<Obs TERM="insofar that" ROLE="Conj" NUMDOCS="4"/>
+<Obs TERM="instead of" ROLE="Prep" NUMDOCS="791"/>
+<Obs TERM="inter alia" ROLE="Adv" NUMDOCS="2019"/>
+<Obs TERM="ipso facto" ROLE="Adv" NUMDOCS="39"/>
+<Obs TERM="irrespective of" ROLE="Prep" NUMDOCS="914"/>
+<Obs TERM="just about" ROLE="Adv" NUMDOCS="4"/>
+<Obs TERM="keep in mind" ROLE="Verb" NUMDOCS="3"/>
+<Obs TERM="keep out" ROLE="Verb" NUMDOCS="8"/>
+<Obs TERM="keep up" ROLE="Verb" NUMDOCS="62"/>
+<Obs TERM="kick off" ROLE="Verb" NUMDOCS="2"/>
+<Obs TERM="laid back" ROLE="Adj" NUMDOCS="4"/>
+<Obs TERM="large scale" ROLE="Adj" NUMDOCS="98"/>
+<Obs TERM="latin american" ROLE="Adj" NUMDOCS="36"/>
+<Obs TERM="lay out" ROLE="Verb" NUMDOCS="6"/>
+<Obs TERM="lead on" ROLE="Verb" NUMDOCS="5"/>
+<Obs TERM="lead to" ROLE="Verb" NUMDOCS="1793"/>
+<Obs TERM="leave out" ROLE="Verb" NUMDOCS="5"/>
+<Obs TERM="light up" ROLE="Verb" NUMDOCS="8"/>
+<Obs TERM="line up" ROLE="Verb" NUMDOCS="3"/>
+<Obs TERM="lock up" ROLE="Verb" NUMDOCS="2"/>
+<Obs TERM="long time" ROLE="Adj" NUMDOCS="120"/>
+<Obs TERM="look forward to" ROLE="Verb" NUMDOCS="14"/>
+<Obs TERM="look out" ROLE="Verb" NUMDOCS="2"/>
+<Obs TERM="low income" ROLE="Adj" NUMDOCS="16"/>
+<Obs TERM="low level" ROLE="Adj" NUMDOCS="225"/>
+<Obs TERM="lower than" ROLE="Prep" NUMDOCS="1005"/>
+<Obs TERM="make out" ROLE="Verb" NUMDOCS="28"/>
+<Obs TERM="make up" ROLE="Verb" NUMDOCS="237"/>
+<Obs TERM="market driven" ROLE="Adj" NUMDOCS="11"/>
+<Obs TERM="mentally ill" ROLE="Adj" NUMDOCS="10"/>
+<Obs TERM="mix up" ROLE="Verb" NUMDOCS="2"/>
+<Obs TERM="mixed up" ROLE="Adj" NUMDOCS="2"/>
+<Obs TERM="more or less" ROLE="Adv" NUMDOCS="130"/>
+<Obs TERM="most often" ROLE="Adj" NUMDOCS="25"/>
+<Obs TERM="most remote" ROLE="Adj" NUMDOCS="16"/>
+<Obs TERM="move along" ROLE="Verb" NUMDOCS="7"/>
+<Obs TERM="must do" ROLE="Adj" NUMDOCS="68"/>
+<Obs TERM="near to" ROLE="Prep" NUMDOCS="62"/>
+<Obs TERM="need to" ROLE="Aux" NUMDOCS="3360"/>
+<Obs TERM="needs to" ROLE="Aux" NUMDOCS="1197"/>
+<Obs TERM="netherlands antillean" ROLE="Adj" NUMDOCS="1"/>
+<Obs TERM="next day" ROLE="Adj" NUMDOCS="14"/>
+<Obs TERM="next to" ROLE="Prep" NUMDOCS="67"/>
+<Obs TERM="no one" ROLE="Pron" NUMDOCS="50"/>
+<Obs TERM="north american" ROLE="Adj" NUMDOCS="23"/>
+<Obs TERM="north korean" ROLE="Adj" NUMDOCS="2"/>
+<Obs TERM="northern irish" ROLE="Adj" NUMDOCS="2"/>
+<Obs TERM="not as good" ROLE="Adj" NUMDOCS="3"/>
+<Obs TERM="not for profit" ROLE="Adj" NUMDOCS="3"/>
+<Obs TERM="not many" ROLE="Adj" NUMDOCS="3"/>
+<Obs TERM="not quite" ROLE="Adv" NUMDOCS="9"/>
+<Obs TERM="now and then" ROLE="Adv" NUMDOCS="2"/>
+<Obs TERM="now that" ROLE="Conj" NUMDOCS="59"/>
+<Obs TERM="null and void" ROLE="Adj" NUMDOCS="77"/>
+<Obs TERM="number one" ROLE="Adj" NUMDOCS="5"/>
+<Obs TERM="of late" ROLE="Adj" NUMDOCS="34"/>
+<Obs TERM="off of" ROLE="Prep" NUMDOCS="19"/>
+<Obs TERM="off the shelf" ROLE="Adj" NUMDOCS="2"/>
+<Obs TERM="old fashioned" ROLE="Adj" NUMDOCS="2"/>
+<Obs TERM="on account of" ROLE="Prep" NUMDOCS="447"/>
+<Obs TERM="on all sides" ROLE="Adv" NUMDOCS="14"/>
+<Obs TERM="on behalf of" ROLE="Prep" NUMDOCS="2461"/>
+<Obs TERM="on grounds of" ROLE="Prep" NUMDOCS="375"/>
+<Obs TERM="on hold" ROLE="Adv" NUMDOCS="4"/>
+<Obs TERM="on pain of" ROLE="Prep" NUMDOCS="8"/>
+<Obs TERM="on the grounds of" ROLE="Prep" NUMDOCS="277"/>
+<Obs TERM="on the matter of" ROLE="Prep" NUMDOCS="6"/>
+<Obs TERM="on the part of" ROLE="Prep" NUMDOCS="527"/>
+<Obs TERM="on the strength of" ROLE="Prep" NUMDOCS="21"/>
+<Obs TERM="on time" ROLE="Adv" NUMDOCS="72"/>
+<Obs TERM="on to" ROLE="Prep" NUMDOCS="472"/>
+<Obs TERM="on top of" ROLE="Prep" NUMDOCS="106"/>
+<Obs TERM="once more" ROLE="Adv" NUMDOCS="65"/>
+<Obs TERM="one more" ROLE="Adv" NUMDOCS="26"/>
+<Obs TERM="op cit." ROLE="Abbr" NUMDOCS="3"/>
+<Obs TERM="ought to" ROLE="Aux" NUMDOCS="124"/>
+<Obs TERM="out of" ROLE="Prep" NUMDOCS="1373"/>
+<Obs TERM="out of control" ROLE="Adj" NUMDOCS="5"/>
+<Obs TERM="out of work" ROLE="Adj" NUMDOCS="6"/>
+<Obs TERM="outside of" ROLE="Prep" NUMDOCS="194"/>
+<Obs TERM="owing to" ROLE="Prep" NUMDOCS="570"/>
+<Obs TERM="paper based" ROLE="Adj" NUMDOCS="3"/>
+<Obs TERM="par excellence" ROLE="Adv" NUMDOCS="5"/>
+<Obs TERM="pari passu" ROLE="Adj" NUMDOCS="20"/>
+<Obs TERM="pay up" ROLE="Verb" NUMDOCS="4"/>
+<Obs TERM="per annum" ROLE="Adv" NUMDOCS="142"/>
+<Obs TERM="per capita" ROLE="Adj" NUMDOCS="95"/>
+<Obs TERM="per diem" ROLE="Adj" NUMDOCS="13"/>
+<Obs TERM="per se" ROLE="Adv" NUMDOCS="83"/>
+<Obs TERM="pick up" ROLE="Verb" NUMDOCS="47"/>
+<Obs TERM="play down" ROLE="Verb" NUMDOCS="2"/>
+<Obs TERM="point out" ROLE="Verb" NUMDOCS="165"/>
+<Obs TERM="preliminary to" ROLE="Prep" NUMDOCS="11"/>
+<Obs TERM="preparatory to" ROLE="Prep" NUMDOCS="22"/>
+<Obs TERM="previous to" ROLE="Prep" NUMDOCS="20"/>
+<Obs TERM="prima facie" ROLE="Adj" NUMDOCS="105"/>
+<Obs TERM="prior to" ROLE="Prep" NUMDOCS="2112"/>
+<Obs TERM="pro forma" ROLE="Adj" NUMDOCS="26"/>
+<Obs TERM="pro rata" ROLE="Adv" NUMDOCS="243"/>
+<Obs TERM="provided that" ROLE="Conj" NUMDOCS="3567"/>
+<Obs TERM="providing that" ROLE="Conj" NUMDOCS="200"/>
+<Obs TERM="pursuant to" ROLE="Prep" NUMDOCS="8208"/>
+<Obs TERM="put by" ROLE="Verb" NUMDOCS="14"/>
+<Obs TERM="put down" ROLE="Verb" NUMDOCS="12"/>
+<Obs TERM="put forth" ROLE="Verb" NUMDOCS="2"/>
+<Obs TERM="put off" ROLE="Verb" NUMDOCS="7"/>
+<Obs TERM="put on" ROLE="Verb" NUMDOCS="275"/>
+<Obs TERM="put out" ROLE="Verb" NUMDOCS="75"/>
+<Obs TERM="put up" ROLE="Verb" NUMDOCS="363"/>
+<Obs TERM="regardless of" ROLE="Prep" NUMDOCS="603"/>
+<Obs TERM="relative to" ROLE="Prep" NUMDOCS="328"/>
+<Obs TERM="round up" ROLE="Verb" NUMDOCS="13"/>
+<Obs TERM="saudi arabian" ROLE="Adj" NUMDOCS="7"/>
+<Obs TERM="save that" ROLE="Conj" NUMDOCS="13"/>
+<Obs TERM="second class" ROLE="Adj" NUMDOCS="6"/>
+<Obs TERM="second level" ROLE="Adj" NUMDOCS="24"/>
+<Obs TERM="seeing that" ROLE="Conj" NUMDOCS="13"/>
+<Obs TERM="set at" ROLE="Verb" NUMDOCS="1156"/>
+<Obs TERM="set back" ROLE="Verb" NUMDOCS="3"/>
+<Obs TERM="set off" ROLE="Verb" NUMDOCS="60"/>
+<Obs TERM="set on" ROLE="Verb" NUMDOCS="68"/>
+<Obs TERM="set out" ROLE="Verb" NUMDOCS="8830"/>
+<Obs TERM="set up" ROLE="Verb" NUMDOCS="2793"/>
+<Obs TERM="show up" ROLE="Verb" NUMDOCS="7"/>
+<Obs TERM="side by side" ROLE="Adv" NUMDOCS="31"/>
+<Obs TERM="sign up" ROLE="Verb" NUMDOCS="11"/>
+<Obs TERM="sine die" ROLE="Adv" NUMDOCS="2"/>
+<Obs TERM="single out" ROLE="Verb" NUMDOCS="8"/>
+<Obs TERM="so as" ROLE="Conj" NUMDOCS="2113"/>
+<Obs TERM="so long" ROLE="Interj" NUMDOCS="155"/>
+<Obs TERM="so that" ROLE="Conj" NUMDOCS="2238"/>
+<Obs TERM="soak up" ROLE="Verb" NUMDOCS="2"/>
+<Obs TERM="sought after" ROLE="Adj" NUMDOCS="12"/>
+<Obs TERM="south african" ROLE="Adj" NUMDOCS="307"/>
+<Obs TERM="south american" ROLE="Adj" NUMDOCS="20"/>
+<Obs TERM="south korean" ROLE="Adj" NUMDOCS="3"/>
+<Obs TERM="southeast asian" ROLE="Adj" NUMDOCS="3"/>
+<Obs TERM="spell out" ROLE="Verb" NUMDOCS="37"/>
+<Obs TERM="sri lankan" ROLE="Adj" NUMDOCS="4"/>
+<Obs TERM="stamp out" ROLE="Verb" NUMDOCS="5"/>
+<Obs TERM="stand out" ROLE="Verb" NUMDOCS="25"/>
+<Obs TERM="stand up" ROLE="Verb" NUMDOCS="13"/>
+<Obs TERM="stemming from" ROLE="Prep" NUMDOCS="176"/>
+<Obs TERM="step up" ROLE="Verb" NUMDOCS="208"/>
+<Obs TERM="sub judice" ROLE="Adv" NUMDOCS="3"/>
+<Obs TERM="subsequent to" ROLE="Prep" NUMDOCS="266"/>
+<Obs TERM="such as" ROLE="Prep" NUMDOCS="4068"/>
+<Obs TERM="such that" ROLE="Conj" NUMDOCS="835"/>
+<Obs TERM="sui generis" ROLE="Adj" NUMDOCS="18"/>
+<Obs TERM="take advantage" ROLE="Verb" NUMDOCS="188"/>
+<Obs TERM="take away" ROLE="Verb" NUMDOCS="6"/>
+<Obs TERM="take in" ROLE="Verb" NUMDOCS="102"/>
+<Obs TERM="take off" ROLE="Verb" NUMDOCS="17"/>
+<Obs TERM="take on" ROLE="Verb" NUMDOCS="184"/>
+<Obs TERM="take out" ROLE="Verb" NUMDOCS="58"/>
+<Obs TERM="take over" ROLE="Verb" NUMDOCS="184"/>
+<Obs TERM="take place" ROLE="Verb" NUMDOCS="1676"/>
+<Obs TERM="take up" ROLE="Verb" NUMDOCS="256"/>
+<Obs TERM="thank you" ROLE="Interj" NUMDOCS="10"/>
+<Obs TERM="thanks to" ROLE="Prep" NUMDOCS="191"/>
+<Obs TERM="third degree" ROLE="Adj" NUMDOCS="2"/>
+<Obs TERM="third party" ROLE="Adj" NUMDOCS="472"/>
+<Obs TERM="tie up" ROLE="Verb" NUMDOCS="2"/>
+<Obs TERM="tip over" ROLE="Verb" NUMDOCS="2"/>
+<Obs TERM="to a degree" ROLE="Adv" NUMDOCS="49"/>
+<Obs TERM="to the point" ROLE="Adj" NUMDOCS="106"/>
+<Obs TERM="together with" ROLE="Prep" NUMDOCS="2810"/>
+<Obs TERM="too soon" ROLE="Adv" NUMDOCS="6"/>
+<Obs TERM="turn down" ROLE="Verb" NUMDOCS="2"/>
+<Obs TERM="turn in" ROLE="Verb" NUMDOCS="7"/>
+<Obs TERM="turn on" ROLE="Verb" NUMDOCS="11"/>
+<Obs TERM="turn out" ROLE="Verb" NUMDOCS="23"/>
+<Obs TERM="turn over" ROLE="Verb" NUMDOCS="12"/>
+<Obs TERM="turned on" ROLE="Adj" NUMDOCS="20"/>
+<Obs TERM="ultra vires" ROLE="Adv" NUMDOCS="2"/>
+<Obs TERM="under way" ROLE="Adv" NUMDOCS="227"/>
+<Obs TERM="up against" ROLE="Prep" NUMDOCS="14"/>
+<Obs TERM="up to" ROLE="Prep" NUMDOCS="3111"/>
+<Obs TERM="upside down" ROLE="Adv" NUMDOCS="4"/>
+<Obs TERM="upwards of" ROLE="Prep" NUMDOCS="4"/>
+<Obs TERM="use up" ROLE="Verb" NUMDOCS="20"/>
+<Obs TERM="used to" ROLE="Aux" NUMDOCS="2133"/>
+<Obs TERM="vice versa" ROLE="Adv" NUMDOCS="172"/>
+<Obs TERM="ward off" ROLE="Verb" NUMDOCS="4"/>
+<Obs TERM="warm blooded" ROLE="Adj" NUMDOCS="1"/>
+<Obs TERM="waste away" ROLE="Verb" NUMDOCS="2"/>
+<Obs TERM="wear out" ROLE="Verb" NUMDOCS="3"/>
+<Obs TERM="well known" ROLE="Adj" NUMDOCS="73"/>
+<Obs TERM="wind up" ROLE="Verb" NUMDOCS="16"/>
+<Obs TERM="wipe out" ROLE="Verb" NUMDOCS="4"/>
+<Obs TERM="with reference to" ROLE="Prep" NUMDOCS="383"/>
+<Obs TERM="with regard to" ROLE="Prep" NUMDOCS="4255"/>
+<Obs TERM="with respect to" ROLE="Prep" NUMDOCS="1734"/>
+<Obs TERM="with the exception of" ROLE="Prep" NUMDOCS="1962"/>
+<Obs TERM="within reach" ROLE="Adj" NUMDOCS="21"/>
+<Obs TERM="without doubt" ROLE="Adj" NUMDOCS="13"/>
+<Obs TERM="work out" ROLE="Verb" NUMDOCS="42"/>
+<Obs TERM="wrapped up" ROLE="Adj" NUMDOCS="2"/>
+<Obs TERM="write down" ROLE="Verb" NUMDOCS="5"/>
+<Obs TERM="zero in" ROLE="Verb" NUMDOCS="19"/>
+<Obs TERM="  la" ROLE="Prep" NUMDOCS="122"/>
+</Data>
+<Metadata>
+<Variable NAME="term" LABEL="Term" LENGTH="256" FORMAT="$256." TYPE="C"/>
+<Variable NAME="role" LABEL="Role" LENGTH="256" FORMAT="" TYPE="C"/>
+<Variable NAME="numdocs" LABEL="# Documents" LENGTH="8" FORMAT="" TYPE="N"/>
+</Metadata>
+</MULTIDS>
+<SYNONYMDS Type="DATA">
+<Data>
+<Obs TERM="sas" TERMROLE="" PARENT="sas institute" PARENTROLE="COMPANY"/>
+</Data>
+<Metadata>
+<Variable NAME="term" LABEL="Child Term" LENGTH="256" FORMAT="" TYPE="C"/>
+<Variable NAME="termrole" LABEL="Term Role" LENGTH="256" FORMAT="" TYPE="C"/>
+<Variable NAME="parent" LABEL="Parent Term" LENGTH="256" FORMAT="" TYPE="C"/>
+<Variable NAME="parentrole" LABEL="Parent Role" LENGTH="256" FORMAT="" TYPE="C"/>
+</Metadata>
+</SYNONYMDS>
+<EMNOTES Type="EXTERNAL" Extension="txt">
+<Data/>
+</EMNOTES>
+</EmFileProperties>
+</PROPERTIES>
+</NODE>
+<NODE CLASS="SASHELP.EMCORE.EXTENSION.CLASS" COMPONENT="TextBoolCat" ID="TextRule" X="723" Y="159" DESCRIPTION="Text Rule Builder" DIAGRAMID="_ROOT_" PARENTID="" TOOLTYPE="MODEL" TOOLPREFIX="TextRule">
+<PROPERTIES Location="CATALOG" Catalog="SASHELP.EMTXTEXT.BOOLCAT.SOURCE" generror="MED" bogustermprob="MED" exhaustive="MED" ForceRun="N" RunAction="Train" Component="TextBoolCat" tgcode="" changetarg="" LastRunMessage="A categorical target variable is required for the Text Rule Builder node to run.">
+<VariableProperties/>
+<EmVariableAttributes/>
+<EmTargetAttributes>
+<Sentiment>
+<DecData Table="EMWS1.TextRule_Sentiment_DD">
+<Data>
+<Obs SENTIMENT="POSITIVE" COUNT="6581" DATAPRIOR="0.917195144" TRAINPRIOR="0.9170847269" DECPRIOR="." DECISION1="1" DECISION2="0" DECISION3="0"/>
+<Obs SENTIMENT="NEUTRAL" COUNT="124" DATAPRIOR="0.0172132633" TRAINPRIOR="0.0172798216" DECPRIOR="." DECISION1="0" DECISION2="1" DECISION3="0"/>
+<Obs SENTIMENT="NEGATIVE" COUNT="471" DATAPRIOR="0.0655915927" TRAINPRIOR="0.0656354515" DECPRIOR="." DECISION1="0" DECISION2="0" DECISION3="1"/>
+</Data>
+<Metadata>
+<Variable NAME="Sentiment" LABEL="" LENGTH="32" FORMAT="" TYPE="C"/>
+<Variable NAME="COUNT" LABEL="Level Counts" LENGTH="8" FORMAT="10." TYPE="N"/>
+<Variable NAME="DATAPRIOR" LABEL="Data Proportions" LENGTH="8" FORMAT="" TYPE="N"/>
+<Variable NAME="TRAINPRIOR" LABEL="Training Proportions" LENGTH="8" FORMAT="" TYPE="N"/>
+<Variable NAME="DECPRIOR" LABEL="Decision Priors" LENGTH="8" FORMAT="" TYPE="N"/>
+<Variable NAME="DECISION1" LABEL="POSITIVE" LENGTH="8" FORMAT="" TYPE="N"/>
+<Variable NAME="DECISION2" LABEL="NEUTRAL" LENGTH="8" FORMAT="" TYPE="N"/>
+<Variable NAME="DECISION3" LABEL="NEGATIVE" LENGTH="8" FORMAT="" TYPE="N"/>
+</Metadata>
+</DecData>
+<DecMeta Table="EMWS1.TextRule_Sentiment_DM">
+<Data>
+<Obs _TYPE_="MATRIX" VARIABLE="" LABEL="" LEVEL="PROFIT" EVENT="" ORDER="" FORMAT="" TYPE="" COST="" USE="N"/>
+<Obs _TYPE_="TARGET" VARIABLE="Sentiment" LABEL="" LEVEL="NOMINAL" EVENT="POSITIVE" ORDER="" FORMAT="$8." TYPE="C" COST="" USE=""/>
+<Obs _TYPE_="DECISION" VARIABLE="DECISION1" LABEL="POSITIVE" LEVEL="" EVENT="" ORDER="" FORMAT="" TYPE="N" COST="" USE="Y"/>
+<Obs _TYPE_="DECISION" VARIABLE="DECISION2" LABEL="NEUTRAL" LEVEL="" EVENT="" ORDER="" FORMAT="" TYPE="N" COST="" USE="Y"/>
+<Obs _TYPE_="DECISION" VARIABLE="DECISION3" LABEL="NEGATIVE" LEVEL="" EVENT="" ORDER="" FORMAT="" TYPE="N" COST="" USE="Y"/>
+<Obs _TYPE_="DATAPRIOR" VARIABLE="DATAPRIOR" LABEL="Data Prior" LEVEL="" EVENT="" ORDER="" FORMAT="" TYPE="N" COST="" USE="N"/>
+<Obs _TYPE_="TRAINPRIOR" VARIABLE="TRAINPRIOR" LABEL="Training Prior" LEVEL="" EVENT="" ORDER="" FORMAT="" TYPE="N" COST="" USE="N"/>
+<Obs _TYPE_="DECPRIOR" VARIABLE="DECPRIOR" LABEL="Decision Prior" LEVEL="" EVENT="" ORDER="" FORMAT="" TYPE="N" COST="" USE="N"/>
+<Obs _TYPE_="PREDICTED" VARIABLE="P_SentimentPositive" LABEL="Predicted: Sentiment=Positive" LEVEL="POSITIVE" EVENT="" ORDER="" FORMAT="" TYPE="N" COST="" USE=""/>
+<Obs _TYPE_="RESIDUAL" VARIABLE="R_SentimentPositive" LABEL="Residual: Sentiment=Positive" LEVEL="POSITIVE" EVENT="" ORDER="" FORMAT="" TYPE="N" COST="" USE=""/>
+<Obs _TYPE_="PREDICTED" VARIABLE="P_SentimentNeutral" LABEL="Predicted: Sentiment=Neutral" LEVEL="NEUTRAL" EVENT="" ORDER="" FORMAT="" TYPE="N" COST="" USE=""/>
+<Obs _TYPE_="RESIDUAL" VARIABLE="R_SentimentNeutral" LABEL="Residual: Sentiment=Neutral" LEVEL="NEUTRAL" EVENT="" ORDER="" FORMAT="" TYPE="N" COST="" USE=""/>
+<Obs _TYPE_="PREDICTED" VARIABLE="P_SentimentNegative" LABEL="Predicted: Sentiment=Negative" LEVEL="NEGATIVE" EVENT="" ORDER="" FORMAT="" TYPE="N" COST="" USE=""/>
+<Obs _TYPE_="RESIDUAL" VARIABLE="R_SentimentNegative" LABEL="Residual: Sentiment=Negative" LEVEL="NEGATIVE" EVENT="" ORDER="" FORMAT="" TYPE="N" COST="" USE=""/>
+<Obs _TYPE_="FROM" VARIABLE="F_Sentiment" LABEL="From: Sentiment" LEVEL="" EVENT="" ORDER="" FORMAT="" TYPE="C" COST="" USE=""/>
+<Obs _TYPE_="INTO" VARIABLE="I_Sentiment" LABEL="Into: Sentiment" LEVEL="" EVENT="" ORDER="" FORMAT="" TYPE="C" COST="" USE=""/>
+</Data>
+<Metadata>
+<Variable NAME="_TYPE_" LABEL="Type" LENGTH="32" FORMAT="" TYPE="C"/>
+<Variable NAME="VARIABLE" LABEL="Variable" LENGTH="32" FORMAT="" TYPE="C"/>
+<Variable NAME="LABEL" LABEL="Label" LENGTH="256" FORMAT="" TYPE="C"/>
+<Variable NAME="LEVEL" LABEL="Measurement Level" LENGTH="32" FORMAT="" TYPE="C"/>
+<Variable NAME="EVENT" LABEL="Target Event" LENGTH="32" FORMAT="" TYPE="C"/>
+<Variable NAME="ORDER" LABEL="Order" LENGTH="10" FORMAT="" TYPE="C"/>
+<Variable NAME="FORMAT" LABEL="Format" LENGTH="32" FORMAT="" TYPE="C"/>
+<Variable NAME="TYPE" LABEL="Type" LENGTH="1" FORMAT="" TYPE="C"/>
+<Variable NAME="COST" LABEL="Cost" LENGTH="32" FORMAT="" TYPE="C"/>
+<Variable NAME="USE" LABEL="Use" LENGTH="1" FORMAT="" TYPE="C"/>
+</Metadata>
+</DecMeta>
+</Sentiment>
+</EmTargetAttributes>
+<EmFileProperties>
+<USERTRAINCODE Type="EXTERNAL" Extension="sas">
+<Data/>
+</USERTRAINCODE>
+<TRCHANGE Type="DATA">
+<Data>
+<Obs _TEXT="I play in small tight places..  Sometimes, People dance right in front of us..  I actually bought one of these  for my partner because for some reason, he would put his stand high and only use 1/3 of" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="nice &amp; ~useless &amp; ~base &amp; ~wrong" _TARGETVAR="Sentiment" _POST_PROB="0.9979481743"/>
+<Obs _TEXT="I agree with the others - I've been using Fast Fret for over 20 years (and Finger Ease spray for over 40), but I believe Slick is a better product.  I give it just 4 stars, though, due to its design." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="great &amp; ~bad" _TARGETVAR="Sentiment" _POST_PROB="0.9972465525"/>
+<Obs _TEXT="Not a great mic, but if you need something realitively cheap, it'll do.  Limited dynamic range.  But, it works.  Wish I'd have gotten something a little nicer though." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="nice &amp; ~useless &amp; ~base &amp; ~wrong" _TARGETVAR="Sentiment" _POST_PROB="0.9971604336"/>
+<Obs _TEXT="The Pyle-Pro PMKS8 mic stand is good for someone looking to buy on a budget. It's fairly solid, heavy enough to hold itself down, and is flexible enough to position the mic how you need it.There are a" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="great &amp; ~bad" _TARGETVAR="Sentiment" _POST_PROB="0.9967073714"/>
+<Obs _TEXT="Bought these to plug into practice bass amp (wifey a little nasty when I get itch to play at 2 am).  I play 5 string and I could not believe the deep sound I get out of these, especially in this price" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="price &amp; ~hate &amp; recommend" _TARGETVAR="Sentiment" _POST_PROB="0.9964705712"/>
+<Obs _TEXT="I was very disappointed when I tried this thing. I bought it so that I could play along the songs that I have on my Ipod but the guitar sounds really distorted (don't thing I haven't tried changing th" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="better" _TARGETVAR="Sentiment" _POST_PROB="0.9960589145"/>
+<Obs _TEXT="These tubes just aren't for me. They don't sound great...kind of flat and lifeless. Also unreliable. One (out of 7) arrived DOA and another has failed since." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="sound" _TARGETVAR="Sentiment" _POST_PROB="0.9944574485"/>
+<Obs _TEXT="I've been playing guitar for over 40 years, and these Tortex picks are nearly the worst I'v ever used.  They are so noisy that they overpower the guitar strings with their clackity-clack noise.  Dunlo" _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="sound &amp; year" _TARGETVAR="Sentiment" _POST_PROB="0.9940677685"/>
+<Obs _TEXT="I have always loved line 6. This product sounded great for about an hour then total gave up. It went dead. I changed channels and it worked for like a minute then went dead. I am sorry to say that I r" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="great" _TARGETVAR="Sentiment" _POST_PROB="0.993302426"/>
+<Obs _TEXT="Don't like that it's difficult to change the tube.  Sound quality was not what I expected, maybe because I wasn't familiar with the settings.  No power cord was included in mine or manual.  Manual sho" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="sound" _TARGETVAR="Sentiment" _POST_PROB="0.992646448"/>
+<Obs _TEXT="I had always wanted a phase shifter but I never wanted to pay alot of money for one because its not something I had to have but I just wanted one. The reason I bought this one was because it was cheap" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="great &amp; ~bad" _TARGETVAR="Sentiment" _POST_PROB="0.9919430742"/>
+<Obs _TEXT="One of the big selling points for this unit was the sound quality and the need for no drivers.  Well - after starting to use it on Windows 7 x64 I was dismayed to find simply awful electrical interfer" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="sound" _TARGETVAR="Sentiment" _POST_PROB="0.9917740557"/>
+<Obs _TEXT="I replaced the nasty, crooked, chipping plastic pins for these, and they work very well in keeping the strings where they should be.  I'm not convinced that they change the sound of my D-28 very much" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="better" _TARGETVAR="Sentiment" _POST_PROB="0.9904354709"/>
+<Obs _TEXT="If you thought a pick is a pick (like I once did long ago) you would probably come to realize that it would be a mistake to assume that position as your playing and playing strength increases in attac" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="better" _TARGETVAR="Sentiment" _POST_PROB="0.9895939302"/>
+<Obs _TEXT="For the price of these strings, you can't go wrong. However, compared to Elixers, the sound just isn't as &amp;#34;full.&amp;#34;" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="sound &amp; ~terrible &amp; price" _TARGETVAR="Sentiment" _POST_PROB="0.9891609124"/>
+<Obs _TEXT="I ordered one of these because I like my other Planet Waves Capo a lot (I believe its the older metal version of this, not the &amp;#34;Lite&amp;#34;). However, this one just does not screw down enough to hol" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="quick" _TARGETVAR="Sentiment" _POST_PROB="0.9877585284"/>
+<Obs _TEXT="I recently bought a few packs of Jazz IIIs and I was shocked.  They don't play at all like what I was expecting.  Under high magnification the edge doesn't look the same as the old Jazz III either, an" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="great &amp; ~bad" _TARGETVAR="Sentiment" _POST_PROB="0.9874225053"/>
+<Obs _TEXT="This is not a great quality microphone. But that's not what I was expecting when I paid $25 for the mic and stand. I bought this for my group of kids in a worship school. I need some less expensive eq" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="great &amp; ~bad" _TARGETVAR="Sentiment" _POST_PROB="0.9874225053"/>
+<Obs _TEXT="Bought this stand after tripping over the three legged design.  Works great and base is out of your way.  Much less likely to catch your feet on as you move around." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="great &amp; ~bad" _TARGETVAR="Sentiment" _POST_PROB="0.9874225053"/>
+<Obs _TEXT="I just recently started up learning guitar.This tuner has already paid for itself in checking that my guitar is in tune,great device!!!" _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="great &amp; ~bad" _TARGETVAR="Sentiment" _POST_PROB="0.9874225053"/>
+<Obs _TEXT="I had fairly low expectation for a ~$25 pedal, but many people said it sounded very close, if not better, than a vintage Boss VB-2. Considering I didn't want to spend 20x this pedal, I can't compare t" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9871132026"/>
+<Obs _TEXT="Works good.good buy" _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9871132026"/>
+<Obs _TEXT="yes, a iittle white flaking but no biggie unless you have a black case interior...easy to install strap locks...use on blue strat and looks great..enjoy" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="great" _TARGETVAR="Sentiment" _POST_PROB="0.985821422"/>
+<Obs _TEXT="More likely known as a guitar compensation device, the effect itself it widely used in everything. I have couple few behringer pedals, some complain about plastic housings but a) I don't beat my gear" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="best &amp; ~crap" _TARGETVAR="Sentiment" _POST_PROB="0.9854213708"/>
+<Obs _TEXT="I thought it would be resin or plastic.Not so: It was made heavier and nicer.The metal must-have will be in the family a while I can tell." _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="nice &amp; ~useless &amp; ~base &amp; ~wrong" _TARGETVAR="Sentiment" _POST_PROB="0.9841122375"/>
+<Obs _TEXT="A well-designed strap that looks and works really nice. I'd say it's a little expensive. They should cut the price down by at least 1/3 and it would be a 5 star rating." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="nice &amp; ~useless &amp; ~base &amp; ~wrong" _TARGETVAR="Sentiment" _POST_PROB="0.9841122375"/>
+<Obs _TEXT="The larger ones sometimes have the neck snap so I thought this might be the answer.  The answer is to treat your larger Snarks nicer cause this thing on the back of your guitar with no adjustments sim" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="nice &amp; ~useless &amp; ~base &amp; ~wrong" _TARGETVAR="Sentiment" _POST_PROB="0.9841122375"/>
+<Obs _TEXT="I wear a large sized glove, so assuming that would translate, I got these.  While I can force it over my thumb, it is very tight and uncomfortable (i.e., pinches).  My thumbs don't have a particularly" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="nice &amp; ~useless &amp; ~base &amp; ~wrong" _TARGETVAR="Sentiment" _POST_PROB="0.9841122375"/>
+<Obs _TEXT="At the time I bought, was $16.  Mine arrived broken, so it had gone back.  Reality is that it is not that good regardless of mine being broken.  Not upset about that - stuff happens.  It is just not a" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9833341879"/>
+<Obs _TEXT="I'm a HUGE fan of the two previous NS Capos from Planet Waves. What does this add to the others?Well, functionally I think it works no better than the previous dual action capo. In other words. It's f" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9822929903"/>
+<Obs _TEXT="My main complaint is that this tuner is only approximately accurate.  It also occasionally fails to register at all.  I've tried putting in slightly different positions on the head of my guitars, but" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="sound" _TARGETVAR="Sentiment" _POST_PROB="0.9808887201"/>
+<Obs _TEXT="Item shipped earlier than I've expected. When I opened the box was surprised as I didn't notice the usb cable. But later I thought that it was impossible and opened the box from another side and here" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="perfect" _TARGETVAR="Sentiment" _POST_PROB="0.9802167898"/>
+<Obs _TEXT="I bought these to chain together some effects pedals for my guitar. They work very well. I don't do too much recording or gigging though, so I'm not sure how well they would work for those activities." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="price &amp; ~hate &amp; recommend" _TARGETVAR="Sentiment" _POST_PROB="0.9798018977"/>
+<Obs _TEXT="I bought this as a second tuner for gigs. It is awesome!Easy to use, easy to see. Simple, inexpensive.Get one! You will not be disappointed." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="awesome" _TARGETVAR="Sentiment" _POST_PROB="0.9795929022"/>
+<Obs _TEXT="If you expect to get what you pay for, prepare to be disappointed. Sounds weak. Sounds old. Sounds worn. Sounds dull. I wanted to experience a new brand on my Stratocaster. I can afford to pay twice a" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="best &amp; ~crap" _TARGETVAR="Sentiment" _POST_PROB="0.9763286989"/>
+<Obs _TEXT="This is one of the best, simple to use, guitar tuners I've used -- and I've used a lot of them.  The bonus is that it's also one of the least expensive that I've seen.  You won't be disappointed." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="best &amp; ~crap" _TARGETVAR="Sentiment" _POST_PROB="0.9763286989"/>
+<Obs _TEXT="Its great for cutting strings but the winder is pretty difficult if you don`t know what your doing. Warning for beginners don't get this!!!!" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="great" _TARGETVAR="Sentiment" _POST_PROB="0.9752463897"/>
+<Obs _TEXT="I definately helps cut down &amp;#34;wind whistle&amp;#34; on my mic. can't say anything great about the product but I cant say anything bad. It does what it is suppose to" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="great" _TARGETVAR="Sentiment" _POST_PROB="0.9752463897"/>
+<Obs _TEXT="This unit might be great if you have child hands - The KEYS ON THE  keyboard is soooo small..  Don't get this if you have Man hands! wtf U[DATE THE DESCRIPTION Akai WTF" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="great" _TARGETVAR="Sentiment" _POST_PROB="0.9752463897"/>
+<Obs _TEXT="I bought this unit because my amp doesn't have reverb. But I discovered that this little pedal can give you greats sounds. Even when I use a reverbed amp, I turn it off and use my Hall of Fame." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="great" _TARGETVAR="Sentiment" _POST_PROB="0.9752463897"/>
+<Obs _TEXT="these are my preferred mics for practice and gigs... an all around tough mic....great for all your needs...I highly recommend them.." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="great" _TARGETVAR="Sentiment" _POST_PROB="0.9752463897"/>
+<Obs _TEXT="i like it as the stars say...great for around the house playing,but  lately i noticed it does cut out on me...when you strum it shuts down somrtimes,i am not sure if it is the battery or it just does" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="great" _TARGETVAR="Sentiment" _POST_PROB="0.9752463897"/>
+<Obs _TEXT="Sorry Fender...this one is just a waste of money.  Get something better that doesn't twist up an ravel into knots." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="better" _TARGETVAR="Sentiment" _POST_PROB="0.9752307836"/>
+<Obs _TEXT="I ordered these stands hoping that they would be better than the price indicated. However, the bag was ripped in 3 places. The stands were both scratched badly with lots of paint missing. The most ann" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="better" _TARGETVAR="Sentiment" _POST_PROB="0.9752307836"/>
+<Obs _TEXT="I like D'Addario strings, but these did not impress me. They are not worth the extra cost, in my opinion." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="impress" _TARGETVAR="Sentiment" _POST_PROB="0.9746864258"/>
+<Obs _TEXT="Some items of GLS work great, others are awful.  Don't trust the products anymore.  It's unfortunate but I don't feel safe with their products, that they'll perform when I need them to.." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="great" _TARGETVAR="Sentiment" _POST_PROB="0.9746293476"/>
+<Obs _TEXT="My fiancee tried it out and kept one of the three that was bought. So I guess she loves it as that is the only pick I've now seen her use. [She has been playing for over 35yrs]" _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="love &amp; ~bad &amp; ~hard" _TARGETVAR="Sentiment" _POST_PROB="0.9736041312"/>
+<Obs _TEXT="I had a friend with one of these and he loves it. I got one on his recommendation and when I put the batteries in it, it started smoking. It did work for awhile. I pulled the batteries out and tried t" _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="love &amp; ~bad &amp; ~hard" _TARGETVAR="Sentiment" _POST_PROB="0.9736041312"/>
+<Obs _TEXT="I bought this as a present for my daughter to learn guitar on. She absolutely loves it. Everyone that has played on it over the past few weeks loves it. You can't beat this for the price!!!" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="love &amp; ~bad &amp; ~hard" _TARGETVAR="Sentiment" _POST_PROB="0.9736041312"/>
+<Obs _TEXT="These were purchased for my sons guitar. He loves them. I plan on buying him another set of them for Christmas." _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="love &amp; ~bad &amp; ~hard" _TARGETVAR="Sentiment" _POST_PROB="0.9736041312"/>
+<Obs _TEXT="This is just your typical nylon strap (a bit stiff, but durable).  I love the Celtic design enough to use this strap, but ordinarily I prefer higher quality materials than the nylon and plastic constr" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="love &amp; ~bad &amp; ~hard" _TARGETVAR="Sentiment" _POST_PROB="0.9736041312"/>
+<Obs _TEXT="Bought stand as a gift for my son's acoustic guitar.  He loves it and now has an electric guitar and wants another stand.  Can't go wrong for the price." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="love &amp; ~bad &amp; ~hard" _TARGETVAR="Sentiment" _POST_PROB="0.9736041312"/>
+<Obs _TEXT="who cares if they were used or hanging around the warehouse hey they went together and don't show any wear and tear to me...love them...thanks" _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="love &amp; ~bad &amp; ~hard" _TARGETVAR="Sentiment" _POST_PROB="0.9736041312"/>
+<Obs _TEXT="theres the snark for clipons, the blackout or boss tu-2 for pedals, or a rack option. my pre-amp unit has a tuner but i love these for tuning off stage or something. got at least 3 of these around, i" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="love &amp; ~bad &amp; ~hard" _TARGETVAR="Sentiment" _POST_PROB="0.9736041312"/>
+<Obs _TEXT="I buy these for my son.  He loves the grip on them as they help stop them from slipping out of his hands.  He also likes the small size.  They last forever and don't break." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="love &amp; ~bad &amp; ~hard" _TARGETVAR="Sentiment" _POST_PROB="0.9736041312"/>
+<Obs _TEXT="My experience with this little tuner has been perfect...It's extremely easy to see in a dark stage environment / it's dead quiet when activated / easy to understand when you are looking down at it whi" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="perfect" _TARGETVAR="Sentiment" _POST_PROB="0.9735443068"/>
+<Obs _TEXT="Broke one of my Snark tuners when I kept it on a guitar while putting it in the case to take to a gig and decided I needed a tuner I could keep on any guitar while it was in any case.Pros:- Fits on an" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="great &amp; ~bad" _TARGETVAR="Sentiment" _POST_PROB="0.9695652898"/>
+<Obs _TEXT="Clamp it on end of the neck of your guitar. Pluck a string and it will indicate what it is. Turn the tuning knob to the desired spot and you are done. Takes 10 minutes to tune the guitar. Mine is elec" _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="electric" _TARGETVAR="Sentiment" _POST_PROB="0.9694414577"/>
+<Obs _TEXT="its perfectly done but it seems its not fitting Squire fender guitar in terms of E-to-E string spacing, The Low E string out of range and not fit in the hole :(" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="perfectly" _TARGETVAR="Sentiment" _POST_PROB="0.9676176945"/>
+<Obs _TEXT="Been using the snark tuners for while now... Functions perfectly.. Only problem I have is it is small enough that I have trouble finding it sometime... So, I have just started leaving it on the instru" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="perfectly" _TARGETVAR="Sentiment" _POST_PROB="0.9676176945"/>
+<Obs _TEXT="I use this adapter to connect my electric guitar and my acoustic guitar to my computer and IT WORKS PERFECTLY!!! Very minimal buzz... LLLOVE IT!!!" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="perfectly" _TARGETVAR="Sentiment" _POST_PROB="0.9676176945"/>
+<Obs _TEXT="The Hosa XLR cables are affordable and very heavily made.I have a large mixer and rack and cables everywhere.I decided to purchase shorter cables and the Hosa cables 5ft measurement worked perfectly.Y" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="perfectly" _TARGETVAR="Sentiment" _POST_PROB="0.9676176945"/>
+<Obs _TEXT="The screws are too long for my very thin bodied Gibson SG Classic.  I can not find shorter screws which fall into the pin so that the straplock will work either---the heads are all too large.I believe" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="perfectly" _TARGETVAR="Sentiment" _POST_PROB="0.9676176945"/>
+<Obs _TEXT="I took a chance with this one since I am desperate to find a mount for my MXL 4000 microphone. I originally bought a &quot;universal&quot; mic stand from guitar center which cost 50bux by the way. That didnt co" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="perfectly" _TARGETVAR="Sentiment" _POST_PROB="0.9676176945"/>
+<Obs _TEXT="I have finally discovered that the &amp;#34;perfect set&amp;#34; is a moving target. As arthritis creeps in I find myself playing heavier strings with a lower action, and these work in that respect. Another a" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="perfect" _TARGETVAR="Sentiment" _POST_PROB="0.9672933755"/>
+<Obs _TEXT="This with my Behringer XM8500 is perfect.I like that it is branded with the planet waves logo on the connectors rather than plain XLR cables Which adds a sense of a quality look my gear. This goes dir" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="perfect" _TARGETVAR="Sentiment" _POST_PROB="0.9672933755"/>
+<Obs _TEXT="I purchased 4 of these, of the four 1 was no good on arrival another failed after 2 short time uses. I will not buy more. The first one was returned after some resistance from the seller the second on" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~bad" _TARGETVAR="Sentiment" _POST_PROB="0.966871734"/>
+<Obs _TEXT="these are well made...good enough to give to buddies and have a few in every guitar case i own..will purchase again..enjoy" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~bad" _TARGETVAR="Sentiment" _POST_PROB="0.966871734"/>
+<Obs _TEXT="I like the Dan Electrode but I noticed dropping the voltage on some of my pedals really changes the effect (turned my Heavy Metal into a sick fuzz and my LavaBox  into a primitive distortion), and on" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~bad" _TARGETVAR="Sentiment" _POST_PROB="0.966871734"/>
+<Obs _TEXT="Got it for $5.00 bucks and wish I'd bought about 5 more.Just as good as anything else out there,Onlky complant is the adjustment to the neck support does go as low as I'd like,but that's my take on it" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~bad" _TARGETVAR="Sentiment" _POST_PROB="0.966871734"/>
+<Obs _TEXT="This is a standard on my peral board along witht he Blues Driver.  This little yellow box is the most bang for your buck you are going to find in an Over Drive pedal.  It is tough, sounds like fire, a" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="We all have different tastes in guitar picks, I know,  As I wrote elsewhere, the Dunlop Tortex are awful for acoustic, in my opinion.  These Ultex are much better.  Not as noisy, better feel.  Still n" _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="This stand feel sturdy and strong.Compact design on stand and folding for travel.Good for acoustic and electric guitars.Thick non scratch foam is a plus.Love it." _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="If you are replacing your old butterfly trees, you can use the same holesclip and sand off the alignment pins, as they are not really needed, and justadd another hole to your headstock.Good trees for" _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="Not much to it, does what it should, holds a standard mic. Pivots in 1 direction only. Not the best build quality in the world (actually fairly thin plastic) but for $5 what else can you ask for? Shou" _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="I purchased this as an extra CV controller for a Digitech Control 2. When I got it, I tried it out as a volume pedal just for kicks and YES it does suck the tone right out of the signal. As far as a C" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="Works well and it's clean no noise, i'm starting to find out even if the price is low it does'nt mean it's not good." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="I think this is a good deal. It's not colorful and flashy but secures theguitar nicely and as a previous reviewer has said, it is a little difficult toget on but it shouldn't fall off." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="I picked one of these up when they were being blown out cheaply at a big box store.  Who doesn't need another pocket tuner to throw in the guitar bag, right?  The price was less than ten bucks, but un" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="I'm used to conventional steel finger picks. These actually work really well as long as you don't play hard, like I sometimes do with my other picks. Playing hard really hurts my exposed finger pads t" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="Be careful; I have a small recording studio, so we put our cables through a lot, and these guys just don't last. They were fine for the first few months, but then they started to die like a murder mys" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="..and that's a good thing. I wanted a tuner pedal that I could use under any lighting condition. My previous experience with Korg equipment made the Pitchblack a no-brainer.There's not much I can say" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="My Hartke 410VX Cabinet was designed by an idiot....9 million pounds and no casters...not even holes for them. Who invented this thing, He-Man? Anyways, I bought these casters, got out the drill, and" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="Mr Miyagi couldn't have said it any better.Robust, compact unit which I use with a Fender Rumble 75. Plenty of lead so I can position it where I need it, and thank heavens for duct tape." _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="They have no grip at all they brake and ware out in a hour or so of hard playing there just junk for newbie that don`t know any beter but hey what do you expect they are made by D Addario get some rea" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="After trying about every comp out there for years, I came across this, I have a Wampler Ego Compressor too, it is the same quality as the Ego Compressor.Better than the Script Reissue, it was too nois" _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="I never use it so I really only wasted my money. I have rather high end guitars so placing any of them other than very securely is not a good way to go.." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="If you bought Rocksmith 2014, and use an electric guitar, get this.  The cobalt strings are picked up very well by the magnetic pickups, and in turn Rocksmith detects the strings A LOT better. I had p" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="Works better than straplocks as it doesnt fail like regular straplocks. I'd use it for lightweight guitars. Using this on a les paul will kill your shoulder. I always suggest this strap to &quot;kids&quot; who" _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="I give the product a 4star for doing what it is supposed to do. I give it a single star because it failed two weeks after the return period. Generously, I'll give it 2stars. Something like this really" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="This product has almost zero documentation in the box or on the Akai Pro website.  Technical support is also almost zero.  Akai seems to not care about getting new users up to speed on their products." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="I had no reference point to judge the size of these picks perhaps compare pick with a quarter in the shot as a sizing method.Good picks though." _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="1,540 people like it,who am i to disagree...it works well but i wish i had discovered the gibson app on my iphone before i bought...but for the price it does work a lot better...never clip it to any b" _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.9668242202"/>
+<Obs _TEXT="I decided to try these because the &amp;#34;normal&amp;#34; picks I was using kept slipping out of my fingers. That was several months ago. I am still using these everyday. Pretty durable and reliable. I do r" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="pretty" _TARGETVAR="Sentiment" _POST_PROB="0.9662071692"/>
+<Obs _TEXT="Sounds and feels nice. I have an entry level guitar, a Peavey Rockmaster. It came with entry level strings. These strings make it sound like an upgraded instrument.Be advised, the low E string is thic" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="nice" _TARGETVAR="Sentiment" _POST_PROB="0.9661900192"/>
+<Obs _TEXT="I'm so glad I bought this instead of some of the cheaper, plastic pedalboards out there.  The board itself is made out of welded metal and it's very sturdy.  The velcro seems to be of decent quality," _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="nice" _TARGETVAR="Sentiment" _POST_PROB="0.9661900192"/>
+<Obs _TEXT="this capo helps make aesome music, thankful for it, i like using it for all kinds of palying, like at the beach" _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="awesome" _TARGETVAR="Sentiment" _POST_PROB="0.9661009951"/>
+<Obs _TEXT="it's a guitar stand that holds your guitar so it don't fall down during a gig hurting potential fans and thier friends....well constructed....awesome price." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="awesome" _TARGETVAR="Sentiment" _POST_PROB="0.9661009951"/>
+<Obs _TEXT="I purchased this after reading the great reviews but like a few of the comments that are on here lately this thing is not good. Looked almost used when it arrived and the gooseneck stand is useless. D" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="great" _TARGETVAR="Sentiment" _POST_PROB="0.9642692739"/>
+<Obs _TEXT="It works well 95% of the time but sometimes has a problem with the G string for me. I use it in tandem with a snark tuner and together they're fail safe. (the snark tuner will also get buggy once in a" _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="able" _TARGETVAR="Sentiment" _POST_PROB="0.9629815491"/>
+<Obs _TEXT="My bass had original-equipment Dunlops on it, but they were silver-tone, whereas all my other hardware is gold.  And after 30 years, they looked kind of dirty and tarnished.  So, I knew it was time fo" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="happy" _TARGETVAR="Sentiment" _POST_PROB="0.9621226655"/>
+<Obs _TEXT="Hey i got this and an &quot;OVATION IDEA&quot; from GO-DPS. I couldnt be happier with these items, especially the &quot;OVATION IDEA&quot; !!!!!!I have to brag on &quot;GO-DPS&quot; some, they are wonderfull dealers; I look forwar" _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="happy" _TARGETVAR="Sentiment" _POST_PROB="0.9621226655"/>
+<Obs _TEXT="I bought 2 of these and hung 2 fender strats on my wall.  Comes with all the mounting screws and anchors needed to mount properly.  Couldn't be happier with this product." _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="happy" _TARGETVAR="Sentiment" _POST_PROB="0.9621226655"/>
+<Obs _TEXT="Solidly built works just as a mic stand should..couldnt be happier..As long as I take care of this Ill never need to buy a new one again." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="happy" _TARGETVAR="Sentiment" _POST_PROB="0.9621226655"/>
+<Obs _TEXT="This strap is very well made.  The leather is real thick and stiff which make is very unlikely to come off your guitar.  Very happy with this low cost strap." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="happy" _TARGETVAR="Sentiment" _POST_PROB="0.9621226655"/>
+<Obs _TEXT="I bought this to restore the neck of an Ibanez that I had ordered used and knew needed TLC.After a few coats of this stuff the neck looked/played/felt like it was just out of the factory! It restored" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="happy" _TARGETVAR="Sentiment" _POST_PROB="0.9621226655"/>
+<Obs _TEXT="I've been eyeing these stands for a while - ~$40-50 always seemed like such a lot of money for something to just hold a guitar upright. I'd spent a little money (usually $5-10) here and there on cheap" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="electric" _TARGETVAR="Sentiment" _POST_PROB="0.9581332576"/>
+<Obs _TEXT="I didn't expect this cable to be so thin. It's easily 1/2 the thickness of any guitar cable I've used. Not sure about long-term durability or signal loss/interference. If I had the foresight I'd spend" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easily" _TARGETVAR="Sentiment" _POST_PROB="0.9575542928"/>
+<Obs _TEXT="I have found that sometimes these cheapy ones tend to break fairly easily but these ones have lasted me a very long time.  Hardly any breaks considering I get the thin ones." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easily" _TARGETVAR="Sentiment" _POST_PROB="0.9575542928"/>
+<Obs _TEXT="This does what you expect, it stands up a guitar. What can else can be said? It has a swing lever that keeps the instrument an an unfortunate accidents. It is portable, folds up easily for storage. I" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easily" _TARGETVAR="Sentiment" _POST_PROB="0.9575542928"/>
+<Obs _TEXT="havent used this one yet.  i got it to run to my pedal board for those stages where the backline is not easily accessible.  seems like a well made cable and i like planet waves products in general" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easily" _TARGETVAR="Sentiment" _POST_PROB="0.9575542928"/>
+<Obs _TEXT="The picks work well with bass, but they are just too thick to use with ukulele. The pics also shed easily, making your instrument dusty in no time." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easily" _TARGETVAR="Sentiment" _POST_PROB="0.9575542928"/>
+<Obs _TEXT="As other reviewers have noted, the ends are too short and dont allow the cable to &quot;click&quot; into the jack of your guitar or amp. Easily remedied by cutting back the rubber by about 1/8&quot; then the cable i" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="easily" _TARGETVAR="Sentiment" _POST_PROB="0.9575542928"/>
+<Obs _TEXT="Bought this for one of my cheaper guitars and it does the job.  It adjusts easily and doesn't look bad either" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="easily" _TARGETVAR="Sentiment" _POST_PROB="0.9575542928"/>
+<Obs _TEXT="As the title, it works the way it's supposed to.  But I wish the rubber part that sits on the table is thicker and heavier so it won't move easily.  Nevertheless, it's a low cost way to set your guita" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="easily" _TARGETVAR="Sentiment" _POST_PROB="0.9575542928"/>
+<Obs _TEXT="What my headline says. It does exactly what it's supposed to do. Removes those annoying popping P's out of your recordings. Until you can afford a Sennheiser condenser microphone that has a built in p" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="exactly" _TARGETVAR="Sentiment" _POST_PROB="0.9574444225"/>
+<Obs _TEXT="Nice little kit. it has 800 grit sandpaper in it, I hadn't noticed that in the listing, maybe I overlooked it. I had just bought some 600 grit at homedepot and used on the neck of a used guitar that h" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="nice &amp; ~useless &amp; ~base &amp; ~wrong" _TARGETVAR="Sentiment" _POST_PROB="0.9525476006"/>
+<Obs _TEXT="Basically because they are the easiest to squeeze in my opinion.  I have big hands which may be part of it." _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.9505776329"/>
+<Obs _TEXT="The handle and spring strength make this uncomfortable to place on the guitar, and I feel rushed to clamp on the capo because it's unpleasant to use - hurts the fingers. It's cheap and easy to use. It" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.9505776329"/>
+<Obs _TEXT="Straplocks have been around for a long time, but now You can use the instrument with a regular strap as well, This dual design sold me on it..Easy to install on the guitar. A little difficult getting" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.9505776329"/>
+<Obs _TEXT="I like these straplocks, but they were a little tight to get on a Levy's strap.  I did manage to get it on.  However, I found it was easier just to buy a strap for each guitar." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.9505776329"/>
+<Obs _TEXT="guitar string 9.5 between 9 and 10.  Does its job for those who want strings that are easier to bend than 10 and not as noodlely as 9." _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.9505776329"/>
+<Obs _TEXT="Fulfils it's intended purpose...Holds several picks.non-marring adhesive on back won't damage guitar finishes.Easy to withdraw and replace picks." _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.9505776329"/>
+<Obs _TEXT="I actually like this bench a lot. It fits into my gear back (rolling duffle style) that contains my cables / power strips etc., with only the folded legs sticking out of the bag. I have the KT7800, wh" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.9505776329"/>
+<Obs _TEXT="I'm an amateur musician and songwriter and this has been very helpful for songwriting ideas.  I haven't studied music formally, so I can't recall what a C#7 looks like versus a F#7 so when I discover" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.9505776329"/>
+<Obs _TEXT="it's 6 bucks so I didn't expect a lot from it, but it works as advertised.  not sure how long the connectors will last though as they do look to be lower quality.  the cable wire is rubber coated and" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.9505776329"/>
+<Obs _TEXT="This is what I have been looking for for my accoustic guitar.  Makes my life easier when I pack up and set up the equipment." _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.9505776329"/>
+<Obs _TEXT="Just what I needed...easy to attach and saved drilling a hole for my guitar strap. Works like a charm!I recommend this product." _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.9505776329"/>
+<Obs _TEXT="In October 2009 I ordered a custom Strat and a Bass and the Custom Strat came with these strings. I recommend going with these. The bullet style makes its easier to install. You know what I mean if yo" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.9505776329"/>
+<Obs _TEXT="My revised review (after about a year of use):The one thing I hated about these is that the screw that is suppose to hold the two pieces on the guitar strap together slowly backs its way out, so if yo" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.9505776329"/>
+<Obs _TEXT="Easy to use, Seems to be well made. I only gave it 4 stars because I wish the built in Metronome made a noise you could hear as you play. Having to look at the beating heart while you play is very dif" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.9505776329"/>
+<Obs _TEXT="Tuning a guitar is difficult for a novice.  This device just clips to the guitar and tuning is easy.  Why you would almost think I know what I am doing." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.9505776329"/>
+<Obs _TEXT="I bought this to tune my 12-string without using the end jack. The headstock is angled back the adjustments that this screen makes have made it easier to see and it is sensitive enough &amp;#8220;feel&amp;#82" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.9505776329"/>
+<Obs _TEXT="I wanted to put a strap on my acoustic guitar. Now it is easier to handle, when trying to play." _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.9505776329"/>
+<Obs _TEXT="No spill, no mess. This is one of the easiest to use products for cleaning strings and necks. Just use the fast fret and wipe off with a rag. It will not dry out, and lasts for years. The only thing I" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.9505776329"/>
+<Obs _TEXT="Disappointing; was looking for to receiving these.But; mostly they are unplayable. Leak air badly. Easier learning bagpipes than these things.Save your money and get some harps that actually work.Dece" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.9505776329"/>
+<Obs _TEXT="When my case arrived I feared it was too small to hold my Epiphone Dot. But, this case fits my Dot like a glove. The case is sturdy enough to protect my guitar from knocks and dings while the plush in" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="protect" _TARGETVAR="Sentiment" _POST_PROB="0.9500859629"/>
+<Obs _TEXT="I have a number of guitars and keep them all on stand in my music room.  This stand is sturdy and protects the guitar well." _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="protect" _TARGETVAR="Sentiment" _POST_PROB="0.9500859629"/>
+<Obs _TEXT="I am worried that I will damage my instruments if they are left standing around. This will allow me to show off and protect them." _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="protect" _TARGETVAR="Sentiment" _POST_PROB="0.9500859629"/>
+<Obs _TEXT="You can never go wrong buying a Kyser capo.  They are made to last and really do what they are designed to do.  The great thing about this capo is that it fits both my banjo and mandolin so I don't ha" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="great &amp; ~bad" _TARGETVAR="Sentiment" _POST_PROB="0.9484987257"/>
+<Obs _TEXT="Not perfect but a solid stand. Prone to tipping over if you just toss your guitar onto it the way I do. And the bottom part that holds the guitar isn't fixed so it's good and bad. Good because it'll h" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="perfect" _TARGETVAR="Sentiment" _POST_PROB="0.9285699697"/>
+<Obs _TEXT="Still a great product it's just a little flimsy. The way the bottom holder attaches to the base is the problem! It doesn't attach! It just slides in and then you kinda just hope it doesn't bend or bre" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="great &amp; ~bad" _TARGETVAR="Sentiment" _POST_PROB="0.9256673205"/>
+<Obs _TEXT="This is a pretty good way to hold a mic if you want to amplify foot-stomping percussion (traditional to French Canadian music).  The base is really heavy, which makes it stay in place well, but it's a" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="pretty" _TARGETVAR="Sentiment" _POST_PROB="0.9241184554"/>
+<Obs _TEXT="This is a fantastic little capo.  I say little because it is not as big as the spring loaded type, of the Shubb capos I've used.It has a low profile, and I can reach right up to it and still play well" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="wrong &amp; ~sound &amp; ~year" _TARGETVAR="Sentiment" _POST_PROB="0.9234002148"/>
+<Obs _TEXT="This is one of the cleanest sounding mini-amps you'll find.  Mine has no hiss or noise through the headphones.  It uses JFET components which get close to a tube amp sound.  It does sound tinny throug" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hate &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.919199448"/>
+<Obs _TEXT="The Base for this thing is a monster! The thing works great, and because of the very strong load the base provides - not the easiest thing to accidentally knock over." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="great" _TARGETVAR="Sentiment" _POST_PROB="0.915576066"/>
+<Obs _TEXT="Not happy with the sellers description or the product. The description says &quot;Heavy Duty&quot; which makes you assume that it's a regular hard plastic Mic Clip, but it's not. IT'S RUBBER!!! It sucks. Used i" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="quickly" _TARGETVAR="Sentiment" _POST_PROB="0.9140786336"/>
+<Obs _TEXT="When I tried it out the first time the octave seemed to be intermittent. Noting that this product comes from China the first thing I suspected was cold solder joints.  I warmed up the soldering iron a" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="great &amp; ~bad" _TARGETVAR="Sentiment" _POST_PROB="0.9055616744"/>
+<Obs _TEXT="I've owned this and a couple of other Korge Tuners in the past, and currently own three.In the past I would use a keyboard to get the bottom E on my guitar and take it from there. These days accurate" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="great" _TARGETVAR="Sentiment" _POST_PROB="0.8976210464"/>
+<Obs _TEXT="This will give you the delay and compression that you need for country twang on the telecaster. It will also give you a rhythm track to play along too. The rhythm machine has 44 rhythms with adjustabl" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="great" _TARGETVAR="Sentiment" _POST_PROB="0.8944838233"/>
+<Obs _TEXT="This works well...A few cons:1. it is not variable speed. on/off in either direction with full torque. Not so bad... but variable speed would have been nice.2. it is a little loud.Other than that... d" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="nice &amp; ~useless &amp; ~base &amp; ~wrong" _TARGETVAR="Sentiment" _POST_PROB="0.8928872658"/>
+<Obs _TEXT="Whats not to  love, inexpensive, and does it's job....After reading some of the rather poor reviews, I checked it out for  signs of poor quality or workmanship... Only thing I found was that  the pin" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="love &amp; ~bad &amp; ~hard" _TARGETVAR="Sentiment" _POST_PROB="0.8894993652"/>
+<Obs _TEXT="I've been playing guitar for over 10 years and decided to take up ukulele as an extra little hobby.This one is pretty decent, especially at the price point. Not exactly the pinnacle of quality, but go" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="pretty" _TARGETVAR="Sentiment" _POST_PROB="0.879647615"/>
+<Obs _TEXT="I bought one of each Soft, Medium and Hard Wedgie rubber picks and even though the colours were right, the Hard is as soft as the Soft. They felt exactly the same in fact. The Medium was the hardest o" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.8760720232"/>
+<Obs _TEXT="exactly what I needed to connect 2 distortion paddles to my amp...do yourself a favor, always order threw Amazon dealers! I placed an order threw onlinecarstereo.com and had to report a scam operation" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="exactly" _TARGETVAR="Sentiment" _POST_PROB="0.8751808527"/>
+<Obs _TEXT="I really like these strings, because I have sweaty hands that tend to make the strings on my guitars corrode and rust very fast. I can play a guitar once, and leave it there for 2-3 weeks, and the str" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="great" _TARGETVAR="Sentiment" _POST_PROB="0.8613167779"/>
+<Obs _TEXT="The most annoying thing about modern ideas in Ukulele strings, or indeed in Guitar strings, is to wind them with aluminum wire - making at the least a black deposit of aluminum on my hands, or at wors" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="best &amp; ~crap" _TARGETVAR="Sentiment" _POST_PROB="0.8473444989"/>
+<Obs _TEXT="I bought a case of these.  I can't handle #12 strings and the sound of #10 is terrible.  I prefer #12 strings for finger picking but they hurt my hands.  not the fingers but the hand and wrists, so .0" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="love &amp; ~bad &amp; ~hard" _TARGETVAR="Sentiment" _POST_PROB="0.8439544482"/>
+<Obs _TEXT="The MXR CSP202 or Dunlop Custom Comp is exactly what I'd been searching for...For years I played with only a crybaby and a phase 45 on the floor and everything else in a rack system. The rack systems" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.841514953"/>
+<Obs _TEXT="Bought Verbzilla, Digitech RV-7, and the verbzilla's ripoff : Behringer RV600.The types of reverb i get from Verbzilla is very insignificant to be used for my synths .. so for that many kind of modes," _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="happy" _TARGETVAR="Sentiment" _POST_PROB="0.8375636787"/>
+<Obs _TEXT="Pretty disappointed in the color. As the review title indicates, what I received is more of a 'black chrome' or dingy stainless color. These are simply not going to work with the MOTS pickguard I purc" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.836577652"/>
+<Obs _TEXT="However I have found that there are much better prices out there if you just do some basic searching.  Usually I do. My bad." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.836577652"/>
+<Obs _TEXT="I purchased this pedal at a local music store for practice and possibly doing some loops at open mics with my Roland GR55 (which has a flawless basic looper built in, but only 20 seconds record and no" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.8363796812"/>
+<Obs _TEXT="This item really speaks for itself. It is a small microphone stand meant for use with a desktop. The base is nice and weighted, but not too heavy to be unwieldy. It's a solid piece that serves its pur" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="nice" _TARGETVAR="Sentiment" _POST_PROB="0.8359129213"/>
+<Obs _TEXT="This is a really solid table mic stand, and you're not going to find a better price (I looked). The base is solid and heavy, and the actual stand is a sturdy metal tube. I liked the first one enough t" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.8344770757"/>
+<Obs _TEXT="The stand seems sturdy, the base is like a tripod base of a mic stand, so it may hold up better in the long run than my other stands that have the &quot;clamping&quot; type of base. The top of the stand is shor" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.8344770757"/>
+<Obs _TEXT="The black mike stand blends in to the background better than silver. It fits standard microphone mounts and has a wire clip to keep the wire from being pulled away from the base." _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.8344770757"/>
+<Obs _TEXT="I was surprised when I tested this microphone. It is probably the best bang for the buck at its price range. The base is heavy enough to allow the microphone to stand upright. However the clip does no" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.8344770757"/>
+<Obs _TEXT="I ordered this from the Amazon warehouse as a refurbished item. It was properly packaged but the base was broken and poorly glued together. The glue didn't  hold so the clamping base separated from th" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="good &amp; ~hard &amp; ~crap &amp; ~annoying &amp; ~hate" _TARGETVAR="Sentiment" _POST_PROB="0.8344770757"/>
+<Obs _TEXT="First the goods: Sturdy leather construction just cant be beat. the color is spot on with the pictures shown.The Bads: It's a bit short, I have it on acoustic guitar that the forward mount is the &amp;#34" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="good &amp; ~bad" _TARGETVAR="Sentiment" _POST_PROB="0.8312121024"/>
+<Obs _TEXT="its good but not fitting my requirement, but its extremely recommend it for beginners because it is very easy to play and bend.. but for me as a reggae rhythm guitar its not good and not warm enough a" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="good &amp; ~bad" _TARGETVAR="Sentiment" _POST_PROB="0.8287646555"/>
+<Obs _TEXT="really you hate warm, sustaining, natural-tube overdrive; you won't like it at all. This is my favorite OD pedal that I have. I have compared it to the Vox ValveTone OD, the OD side of a EHX Germanium" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hate &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.8265866835"/>
+<Obs _TEXT="this piece of plastic is just terrible.  you'd be better off with a couple of books and a towel.not recommended!" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="better" _TARGETVAR="Sentiment" _POST_PROB="0.824653218"/>
+<Obs _TEXT="First of all as a former touring guitarist and a guitar tech junkie, I have a tool box with every tool you can imagine.  I have to say this string cleaner is a must have!  I say this because in the lo" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Validate" _WHY="great" _TARGETVAR="Sentiment" _POST_PROB="0.8242323032"/>
+<Obs _TEXT="Unfortunately, these tuners require drilling to fit my Squier Strat.They look very similar but the two pins are approximately 1/16th of an inch further out from the shaft so I'm going to have to drill" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="great" _TARGETVAR="Sentiment" _POST_PROB="0.8217865801"/>
+<Obs _TEXT="I had high hopes for this replacing my pedal board but there are a couple of things I don't like about it.  It has a button clip on the back which is non-removable so makes it all but useless if you d" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="value" _TARGETVAR="Sentiment" _POST_PROB="0.8131351815"/>
+<Obs _TEXT="Not great but not bad as well.  The base strings feel really strange when sliding. The 6th string and the 1st string were cut while I was playing so I had to change them the second day I installed the" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="easy" _TARGETVAR="Sentiment" _POST_PROB="0.8113844752"/>
+<Obs _TEXT="I really feel like this thing is my personal slave, just standing off to the side, waiting to grab my guitar when I hand it off. It is reliable and rock solid. The tripod base has been very steady so" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.8073840995"/>
+<Obs _TEXT="I'm using them to angle my speakers up in addition to isolating them from the desk surface. Unfortunately, these angle the speakers down by default, so I had to do some cutting and rearranging, but it" _TARGET="NEGATIVE" _ORGTARGET="NEGATIVE" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="better" _TARGETVAR="Sentiment" _POST_PROB="0.7912213343"/>
+<Obs _TEXT="With a twang twing twong nothing wrong... gotta love these strings that just wanna sing." _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="POSITIVE" _PARTITION="Training" _WHY="love &amp; ~bad &amp; ~hard" _TARGETVAR="Sentiment" _POST_PROB="0.7579207576"/>
+<Obs _TEXT="I bought this because I was going on a trip and needed an amp I could pack in my suitcase that would work with a battery.I had a similar amp before that died. The Honeytone is very compact, but looks" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="useless" _TARGETVAR="Sentiment" _POST_PROB="0.7121703161"/>
+<Obs _TEXT="This is my third circuit breaker cable. I play in church and no one wants to here the &quot;POP&quot; if I have to leave the sanctuary. Why three: 10foot, 15foot, and 20foot depending on the setup for the group" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hate &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.6412176561"/>
+<Obs _TEXT="As a guitarist, I lose and find picks everywhere. I hate buying them because I know they are somewhere in my house but I just can't find them. With this, I take all my old credit cards, student ID car" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hate &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.6412176561"/>
+<Obs _TEXT="I've got an old mesa boogie that has developed scratchy controls over the years.This stuff cleaned most of them out pretty well but my midrange pot is starting to crackle again.I hate to tear the chas" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hate &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.6412176561"/>
+<Obs _TEXT="This is more of a like it or hate kind of item. If it doesn't work, you hate it. If it works, there's nothing impressive about a stand, so I just like it." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hate &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.6412176561"/>
+<Obs _TEXT="I was very disappointed in both the quality and engineering of this product. A work-around for the main issue follows the review. The flaws that bother me in order of significance are:1) Quality: Very" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~sound &amp; ~year" _TARGETVAR="Sentiment" _POST_PROB="0.6135770388"/>
+<Obs _TEXT="This pick is well designed for mandolin playing.  Unlike standard guitar picks, it has generously radiused corners.  It's also stiff and comfortable to hold when playing." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="standard guitar" _TARGETVAR="Sentiment" _POST_PROB="0.6052358541"/>
+<Obs _TEXT="Well this cable certainly didn't last long as the title says 8 weeks.  Bought a new Fender Mustang2 v2 amp a week and a half ago.  Last night amp would turn on but wasn't putting out any sound from th" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.5975111704"/>
+<Obs _TEXT="I've been searching for the 'perfect' capo for years now and this one's come the closest so far.The capo's well made and doesn't show any manufacturing flaws at all. As delivered, the capo fits the ne" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.5830095425"/>
+<Obs _TEXT="To my mind there are three criteria for evaluating a capo:1) It's got to hold with enough even pressure to keep all the open stringsringing clearly, especially in the face of hard picking, strumming," _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.5780904193"/>
+<Obs _TEXT="It's not going to win any awards for sound quality, but it sure is cute.  As you might expect, it's a pretty boxy sounding little amp, more reminiscent of 60's portable transistor radios than a double" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="terrible" _TARGETVAR="Sentiment" _POST_PROB="0.5744958495"/>
+<Obs _TEXT="I purchased 2 of these items to use with my band for the guitarists. I was disapointed when I mounted a Shure sm 58 mic on it and found that the goose neck would not stay erect. These are made far too" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="waste" _TARGETVAR="Sentiment" _POST_PROB="0.5711014173"/>
+<Obs _TEXT="Bought this so my mommy can sing karaoke on YouTube. Also my cousins use it when practicing before using the condenser microphone before home studio recordings with my focusrite 2i2 interface. my cous" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="waste" _TARGETVAR="Sentiment" _POST_PROB="0.5711014173"/>
+<Obs _TEXT="Depending on the amp and guitar you have, this pedal is going to either really be great or be a bummer. It sounds terrific with my fender strat (single coil) Danelectro (lipstick pickups) on my solid" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hate &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.5696614622"/>
+<Obs _TEXT="For $13, its hard to say anything bad about this gadget. It's accurate in any sound environment, easy to read in any light, very portable, and will tune any stringed instrument. The visual metronome w" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.5659516044"/>
+<Obs _TEXT="I've owned a half-dozen LED music stand lights over the years. This one puts them all in the shade (pun intended; sorry).The 9-LED bar spreads the light well in a wide fan pattern. The light is concen" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.5455540034"/>
+<Obs _TEXT="I am a long-time musician with lots of experience with tuners and stringed instruments ... wanted to like this ... but ...First the positives:- Looks great- nice, easy to read display- the screen pivo" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="useless" _TARGETVAR="Sentiment" _POST_PROB="0.5218943864"/>
+<Obs _TEXT="I might have done something wrong...I read in a review that these hold six picks.It held three real well but on the fourth insert the thing just fell apart...I'll just keep using my pockets." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.5132125135"/>
+<Obs _TEXT="It can be an octave divider (up to two up or down)It can do parallel intervals (a la Trevor Rabin on Owner Of A Lonely Heart)It can do intelligent harmonies (just make sure your guitar is IN TUNE so i" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.5132125135"/>
+<Obs _TEXT="They are a wonderful product! The lighter the strings on your acoustic the less taxing to the neck of your guitar, with these you can't go wrong." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.5132125135"/>
+<Obs _TEXT="I would think it would be reasonable to assume that this would fit a Squier Bullet Strat, but the holes didn't line up, it didn't fit between the neck and the bridge, in fact, it was completely wrong." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.5132125135"/>
+<Obs _TEXT="Lets face it, in general string winders are pretty much all the same right? WRONG! I went with this one because I trusted the Dunlop name. What a let down. on the second guitar I used it on the handle" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.5132125135"/>
+<Obs _TEXT="I used to buy leather straps but not any more. This strap is very nice and comfortable. It's also the cheapest one I ever bought. Can't go wrong." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.5132125135"/>
+<Obs _TEXT="There was nothing wrong with my original neckplate, but I was replacing the rest of the hardwear and pick this up just to add just a little something extra.  IT was a direct replacement for the origin" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.5132125135"/>
+<Obs _TEXT="Could be a fluke, but my unit was defective straight out of the box.  Plugged it into the Macbook Pro, fired up GarageBand and right away it's MIDI connectivity was intermittent. Then it had some stuc" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="intermittent" _TARGETVAR="Sentiment" _POST_PROB="0.4893331453"/>
+<Obs _TEXT="I've been using Sennheiser's for years and while I am very pleased with them I decided to try the ATH-M50Ss on a whim.  I spent a little more ($50) than what I've been paying for the Sennies but it wa" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hate &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.4880876524"/>
+<Obs _TEXT="I got this for my wireless mics but they don't fit in this holder. I got the wrong size holder. Other then that it is a good holder" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~sound &amp; ~year" _TARGETVAR="Sentiment" _POST_PROB="0.4850772804"/>
+<Obs _TEXT="Construction is fine, and you can set it up in 30 seconds. It holds my bass just fine and the swiveling bottom is not an issue for me. I don't know why some people hate it. The rubberized neck holder" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hate &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.4788360498"/>
+<Obs _TEXT="I am not hard on cables.  I typically just plug them in to my guitar, dont move around much, and play for an hour or two a day.  this one seem to perform just fine.  no buzz, and/or other noises noted" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="I started doing a lot of fingerstyle guitar playing, and it seems to have made my fingertips slick.  So I have a hard time holding on to picks (when I use them) on upstrokes.  I'm sure I could improve" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="i play metal / hard rock and have used many different strings, these give the best tone and depth you need to play hard music" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="The winder makes a loud and ear piercing squeaking when winding fast. I tried unscrewing it and putting a little oil on the screw head but it didn't make much difference. I hope it goes away with use." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="I am VERY satisfied with my hard shell A-style mandolin case; I received prompt delivery, it was reasonably priced, and a quality product; thanks!" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="Hard to believe that I need to review a Pick but I really like these picks.  I got a half dozen for Christmas and was thrilled.  I also got one of those Pick Punches (Super cool item if you ever get a" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="Hi, I thought these pots would come without the proper caps, it`s not on the description of the product, and they did, so I'm pleased by it, have not installed them yet... they are CTS brand, it`s har" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="I bought these when I had to re-tube my Marshall JCM800 2203KK head. This is the only tube head I have played or had so I really cant tell you how they compare to other brands but these things rock. T" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="it's semi-secure on carpeting or hard floor, but all together I am pretty unsatisfied with this stand. The bottom piece has no way to lock in place, and although with the guitar on it it is more stabl" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="I'm using this with an Ovation Balladeer. A guitar with a rounded back that demands you use it with a guitar strap at all times. My guitar strap is over 50 years old, circa 1967, so the leather is a b" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="it ok, its hard to use the bottom 1u space because of the angle, the gear must be very short to fit the bottom space before hitting your mounting surface....11u rack, not 12u...." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="it's hard to keep the loose end under the holes and since the holes are metal they can scratch the neck of the instrument. otherwise it's a good idea." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="I love the concept and design of these picks save one flaw-the rubber gripping goes down too far on the pick.  I don't know any guitar players that have their thumb on the entire pick, and since it go" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="I say this one is more between a Fender Medium and heavy. But it has the star for grip and that is super. Hard not to like. Get some!" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="It's working ok, not for hard useI just use it on my PC table for karaoke online.with phantom mic it's well done." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="They do the job and are made well. I guess the high dollar cables are better but it's hard to tell the difference." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="The instructions could be written much better but I really like having one of these, in fact, I'll probably get a second one to tie to the first one so I can include more instruments.I guarantee, if y" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="Windows 7 install worked fine.I use Mixcraft Pro 6 and it's working well.I did have an issue with the drivers, since I had too many midi devices, but the fix wasn't too hard." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="I sometimes see reviews as redundant and unnecessary and I see a lot of positive reviews for this guitar strap, but I don't know why. Maybe other people don't really care what kind of strap they have" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="Update:  We received a replacement for this item. It does everything it was advertised to do, and it performs quite well, although the clip on the new one doesn't grip as well as the first.  The devic" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="It is well made and is very safe unless a drunk drummer knocks over your stand. I would prefer more tilt, but it serves the purpose. It's Also harder to use your iPad without holding it and having an" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="These are a little course for what I wanted. Brass is a lot better, and the edges are too sharp for fast picking. They may be giving the strings a little premature wear, and the loss of tonality is th" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="Not bad, but I had intended on leaving this on my instrument. I bought a few for different basses and guitars. But the switch location causes the tuner to turn on inside a gig bag (no problem with har" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="I had been using a full boom mic stand at my studio desk, and since it was off to the side, made it tuff to watch the level meters. This clamp-on boom serves the purpose, but has a hard time holding t" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="I used to swear by Hard and stiff picks on my Les Paul Custom, but I recently bought a Strat '62 re-issue--and these are TOO MUCCH FUN for fast rhythms with a WAH or Phase 90 (phaser) pedals!!!" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="This is an OK solution to keeping your picks handy and organized; at least you can have one place where you can find a pick, as opposed to having them scattered all over the house and in every case, b" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="Bought these to try them out the medium gauge and brand. Mediums too hard on my thin fingers and will stick to light and extra light gauges. The strings were hard to slide, un-slippery, and changing b" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="Extra Light gives good action for my small guitar. Not so hard on the fingers. Tone is not bad but not same as 11 or 12 gauge." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="I've never bought strings before so it is kind of hard for me to rate these.  So far so good!" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="My hopes for this pad was that it would be soft a sqishy on my shoulder.  The gel is pretty dense, so it's kind of hard and squishy and very heavy!  I found that it just added more weight.  I'm not us" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="I had neglected my guitar for awhile but just got back into the swing of things. Needless to say the strings were at least 5 years old and I was about to replace them with new ones but thought I would" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="I've used these for years....acoustic and electric. Very hard to beat. I like the feel and texture of these &amp;#34;pics&amp;#34;. They do the job brilliantly." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.467275764"/>
+<Obs _TEXT="Let me start off saying that you cannot go wrong buying any of the series of Mighty Bright music stand lamps.  The Orchestra lamp in particular is a fantastic product.  It provides plenty of smooth, e" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~sound &amp; ~year" _TARGETVAR="Sentiment" _POST_PROB="0.4565376401"/>
+<Obs _TEXT="First off, let's get the dimensions out of the way; for some reason, finding these basic dimensions on a lot of guitars and cases is close to impossible; just try to find the dimensions of the DR-212" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="terrible" _TARGETVAR="Sentiment" _POST_PROB="0.4543534014"/>
+<Obs _TEXT="I bought the wrong pack(Was supposed to buy the light/medium pack) but its alright these picks let me try out a bunch of different gauges and materials to see what fit me best. My favorite pick out of" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~sound &amp; ~year" _TARGETVAR="Sentiment" _POST_PROB="0.4521781534"/>
+<Obs _TEXT="not so pleased with this, the seller is fine, no prob. there, its that this mic for my use is useless, it records tooo low, cant get enough volume from it" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="useless" _TARGETVAR="Sentiment" _POST_PROB="0.4443423732"/>
+<Obs _TEXT="This gadget works fine to connect an electric guitar to an iPad or iPhone or a computer, but the particular one I received has a defective input socket for a 1/4 inch audio plug.  It doesn't snap in p" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="useless" _TARGETVAR="Sentiment" _POST_PROB="0.4443423732"/>
+<Obs _TEXT="I don't know how this will work with other MIDI instruments but I tried it with the Roland TD9 drums and although it does transmit the data, the drum map is totally off. The respective triggers (hihat" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="wrong &amp; ~sound &amp; ~year" _TARGETVAR="Sentiment" _POST_PROB="0.4347222903"/>
+<Obs _TEXT="I have had this tuner for about half a year and frankly, I have had enough.The main problem with this tuner is the usability.The tuner has a poor display, is extremely finicky and it does not display" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="terrible" _TARGETVAR="Sentiment" _POST_PROB="0.3937821561"/>
+<Obs _TEXT="Not as sturdy as some I've used and seen floating around, but it gets the job done as advertised.  Not a terrible buy.  Construction is a bit on the cheap side, though, as it is mostly plastic and see" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="terrible" _TARGETVAR="Sentiment" _POST_PROB="0.3937821561"/>
+<Obs _TEXT="These strings honestly aren't for rhythm. They bend too easily, making rhythm playing impossible. On the plus side, for soloing, you can't go wrong with these. Honestly, I would get the Hybrid Slinkys" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.3876362015"/>
+<Obs _TEXT="I actually forgot that I bought the heavy and medium versions of this pick.  It's not a bad pick, I will continue to use them but I wish they had a softer center, or softer coating where you grip the" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.3836626904"/>
+<Obs _TEXT="It works for what it is, it just feels a little light when you wind after getting the tension up.  Not a bad product, just don't know how long it will last." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.3836626904"/>
+<Obs _TEXT="Not the greatest cord I have ever used, not the worst either. I would prefer Fender Tweed cables over this one if I had to make a recommendation." _TARGET="NEUTRAL" _ORGTARGET="NEUTRAL" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.3836626904"/>
+<Obs _TEXT="At the begining I wasn't sure to buy it since there are a lot of reviews out there with negative imputs about this, so I decided to buy it and I started having problems right of the box, I notice this" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.3836626904"/>
+<Obs _TEXT="I purchased these to use with my mandolin. They are ok.  I personally prefer a little stiffer pick, but my kids have been using them with their Uke's so all in all not a bad purchase." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.3836626904"/>
+<Obs _TEXT="If you need a simple, normal-length strap, this should work fine.  However, if you are tall and like to sling the guitar a bit on the low side, this is not what you need.  I bought this but wound up o" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.3836626904"/>
+<Obs _TEXT="I haven't had to change the battery on this bad boy in over two years since I've had it!  It also is bright and is very accurate.  If looking for an inexpensive tuner look no further!" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.3836626904"/>
+<Obs _TEXT="Let me just start out by saying that I've been playing guitar for over 30 years and have owned a lot of different pedals over all this time. I still own most of these units except for this one...the J" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.3836626904"/>
+<Obs _TEXT="I'm not sure what I was expecting.  This definitely is a fuzz, but the one I got doesn't seem to have much in the way of subtlety.  It's either nothing, a lot, a lot more or way too much.  It's not ba" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.3836626904"/>
+<Obs _TEXT="I've got several guitars and CAPOs - this one is not too bad. I would still prefer classic style. Seems like spring is a bit too strong. Price is great thou!" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.3836626904"/>
+<Obs _TEXT="Eh. I wish I had more of a passion to play it, but....ehh. It's not bad if you want a uke, but it's pretty small. I don't know what I was expecting. I don't know shit about ukuleles but I do know get" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.3836626904"/>
+<Obs _TEXT="I have a home brew pedal board with 6 pedals on it. This allowed me to clean up the wiring a lot and powers all of them with no problems. The blue LED lights are quite bright and make the pedals visib" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.3836626904"/>
+<Obs _TEXT="Works good, nothing special. I have to say I disagree with a couple of reviews which complained about a bad smell. My big nose can't confirm that. Maybe they corrected the problem if one exited." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.3836626904"/>
+<Obs _TEXT="This came in the mail today in a rather large box. The blue LED light is fine, you can put about 5 medium picks in the Pick holder. More than enough to keep me and a friend in picks for a few songs. I" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.3836626904"/>
+<Obs _TEXT="i mean, sure they get the job done, but there're 2 things i'm not too convinced about.. first stability, you have to be very very careful as how you distribute the microphone's weight, and be pretty c" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.3836626904"/>
+<Obs _TEXT="This is a great product, just not for me. I found it brightened my tone way too much and I went back to plastic. Gave my guitar a bad metallic sound, and I lost bottom end." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.3836626904"/>
+<Obs _TEXT="Good:  Plenty of gain on hand.  Lots of sustain!This thing can get really loud.  It gives yourinexpensive tube amp that Marshall crunch.Built well, it's casing is made out of metal, not plastic.Inexpe" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.3836626904"/>
+<Obs _TEXT="This is far more pedal than I need but what a fun pedal to have.  Just going through the presets was fun, but downloading and trying the stuff they have available online was even funner :)  The bad pa" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.3836626904"/>
+<Obs _TEXT="One of the my favorite thigns about Strats is how easy they are to modify/customize. After about 10 years with my American Standard, I was itching to change up the look so I changed out the pickguard" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.3795870281"/>
+<Obs _TEXT="It's tough to shell $85+ for a pedal that is not an effect, but now that I've had it for a few weeks I'm glad I bought it. Although my guitars pretty much stay in tune, warmer weather and humidity lev" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.3795870281"/>
+<Obs _TEXT="A must have in every gig bag for checking all your cables.  I keep this with my battery tester for my active's.  Sure eliminates a lot of guess work at this first hint of audio trouble.  Easy to use a" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEUTRAL" _PARTITION="Training" _WHY="tester" _TARGETVAR="Sentiment" _POST_PROB="0.3714362395"/>
+<Obs _TEXT="does its job just fine. simple and kind of cheap looking and its hard to balance if you have it on a rug (and not even a thick rug...I have a thin rug and it still is unbalanced, but hey, its not real" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.3686648888"/>
+<Obs _TEXT="The cable tangles easily. Not stiff enough.It get's in the way and is hard to stay stretched out. But the color and the cloth cover is cool looking and has a more personal feel than the common rubber" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.3314436417"/>
+<Obs _TEXT="I have the older version of this as well this newer one.  The older one is more responsive to various instruments that can be hard to tune this way, like banjos, mandolins.  Sometimes this new one jus" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.3314436417"/>
+<Obs _TEXT="they work well. For me, the instalition wasn't that hard, it took me maybe four or five minutes. The screws provided were a bit bigger than my BC Rich Avenge Beast's stock strap system, BUT when you r" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.3309837058"/>
+<Obs _TEXT="This tuner is tiny and works as advertised to tune my guitar, bass and banjo.  I have tested it against other, older and larger tuners and all tune to the same accuracy, which is very good.I docked it" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.3309837058"/>
+<Obs _TEXT="i got this as a gift for the my guitar mentor and lead guitar player in my band.  i have a tuner built in to my amp i use but he has always tuned by ear which is hard to do on stage or even at rehears" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.3309837058"/>
+<Obs _TEXT="After years of using a diagonal pliers, this small and secure to use around top line guitar/bases, this guys just made my #1 none StewMac tool in my tool set." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="base" _TARGETVAR="Sentiment" _POST_PROB="0.3228964016"/>
+<Obs _TEXT="This is a really nice product for the price.  When fully extended, it becomes a little tippy, but I don't fully extend the legs which gives it a wider, more stable base.  Otherwise, it folds up nice a" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="base" _TARGETVAR="Sentiment" _POST_PROB="0.3228964016"/>
+<Obs _TEXT="I really like this stand. It has a nice wide leg base and well padded neck and body holders. It is a nice solid tubuler style guitar stand and either my electric or acoustic guiter fits well in it. I" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="base" _TARGETVAR="Sentiment" _POST_PROB="0.3228964016"/>
+<Obs _TEXT="My problem is that I am used to playing Hohner Golden Melody and Special 20 harps.  I guess I should have paid attention to the other 1 and 2 star ratings.  These harps have no volume.  Don't waste yo" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="waste" _TARGETVAR="Sentiment" _POST_PROB="0.322486784"/>
+<Obs _TEXT="Long story short, this string set has a strong metallic character, which distorts the natural sound of your guitar so much. Many people might like it, but for me, absolutely Noooooooo!I have a seagull" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="bad" _TARGETVAR="Sentiment" _POST_PROB="0.3173635908"/>
+<Obs _TEXT="For some reason, this one just doesn't hit the notes right.  It looks like it should tune more precise than other models but the tone is way off for mine anyway.  I have tried it several times and it" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="bad" _TARGETVAR="Sentiment" _POST_PROB="0.3173635908"/>
+<Obs _TEXT="I bought this to replace a cord I was using to practice my guitar. My first cheap cord wasn't actually broken, but I didn't want any down time, so I had this just sitting there as a replacement. Fast" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="bad" _TARGETVAR="Sentiment" _POST_PROB="0.3173635908"/>
+<Obs _TEXT="After first receiving the wrong item (not a mike at all) Amazon promptly corrected the error and sent the microphone ordered.This microphone feels well built from all metal construction and the XLR co" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~sound &amp; ~year" _TARGETVAR="Sentiment" _POST_PROB="0.3121844543"/>
+<Obs _TEXT="I've been using Dunlop Nylons for almost as long as I've been playing guitar (twenty one years now). I find the .60's are just a bit too thin, but for more chord strumming style playing, such as playi" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.3121787461"/>
+<Obs _TEXT="This is nearly identical to theGuardian Cases CG-020-B Bass Guitar Caseat about half the cost. However, there are some issues with this case as well as limitations.First the issues: while the covering" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.3087907901"/>
+<Obs _TEXT="Sweet little neck stand.  Very light weight.  Folds compact to fit in your guitar's hard case or gig bag.  Padded to protect guitar neck." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.3087907901"/>
+<Obs _TEXT="I swapped out the pickguard on my American Standard to a black one so I figured I'd change the back plate as well. While nobody really sees the back, it drives me nuts when the front and back don't ma" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.3009945604"/>
+<Obs _TEXT="I am happy with the strap button that I purchased, however they sent me the wrong one.  No big deal." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.279530837"/>
+<Obs _TEXT="I put these strings on every acoustic I own.  They sound great and are priced right!  You can't go wrong with D'Addario strings!" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.2729527858"/>
+<Obs _TEXT="Great polishing cloth. Not much to say here other than it works and works well. Removes all the fingerprints and polishes my baby up like new after each practice or gig. Can't go wrong." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.2729527858"/>
+<Obs _TEXT="These come with a stereo holding bar and adapter for mic stand.  They do need 48 V phanom power from your board or a mic amp.  I'm using a mic amp and these are the input to a paging system which I wi" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.2729527858"/>
+<Obs _TEXT="Works great.  For the money you can't go wrong with this effect.  I'm using it more then I thought I would when I first bought it.  The only thing I don't really care for is the stomp switch which is" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.2705140365"/>
+<Obs _TEXT="Got this cable to run a rockband keyboard controller to my M-audio profire 2626 to control midi in Pro Tools. Works great! Firm fit, solidly molded ends, reputable branded cable.(a bit on the thin sid" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.2705140365"/>
+<Obs _TEXT="These just happen to be my favorite.I always keep .46mm .60mm and .73mm sizes on hand. (mostly use the .60's) I've been using them for years and so will probably never change. I like the 'grippiness'" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hate &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.2685674306"/>
+<Obs _TEXT="It does the job. The only problem is that it sticks out a little to far down underneath the guitar neck thus impeding the fingers from taking the right position for some of the chords. You slide it up" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.2653707163"/>
+<Obs _TEXT="Been ;'golding up' an 88 Strat Plus that has seen better days. Wiith the gold pick guard, tuning pegs, and jack plate - it looks like a custom shop job. This finished my hard work and I am delighted w" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.2653707163"/>
+<Obs _TEXT="I used to buy a lot of wire form these guys.... However, you need to be careful and test everything you get from them on an XLR cable tester.I didn't believe it myself...I read another reviewer had an" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEUTRAL" _PARTITION="Validate" _WHY="tester" _TARGETVAR="Sentiment" _POST_PROB="0.2636358695"/>
+<Obs _TEXT="Spend a few extra bucks and get a music stand that is sturdier! these can't support heavy stuff and will knock over SO easily. They sure are portable though. not a bad idea to keep one in your car jus" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.2630949503"/>
+<Obs _TEXT="I use Dunlop Orange because the thickness is perfect. I hit the strings very, very hard and these picks are heavy enough to get the job done yet I don't break many strings." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.2628094942"/>
+<Obs _TEXT="These are perfect. Hard to beat strings. They last, keep in tune, and keep their tone. They don't need any string cleaners either. So you can save money on that. An obvious noticeable difference betwe" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.2628094942"/>
+<Obs _TEXT="I've never had a problem with these patch cables. I'm running 6 pedals and no issues like crackling or cutting out.One thing that is important to note is that I'm not hard on my gear. I'm a home noodl" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.2619366589"/>
+<Obs _TEXT="Purchased this capo after having a bad experience with a spring style capo.  This capo was just perfect for my needs." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.2560629692"/>
+<Obs _TEXT="Ordered one of these Gig Bags for a new Les Paul - the hard shell cases are back-ordered, and I didn't want the guitar just sitting attracting dings and dust.Fits a LP Studio perfectly, has room for s" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.2535524891"/>
+<Obs _TEXT="It's a little harder to open than other capos I've used, but it works perfectly once you get used to the toughness of it. It's not cheap and flimsy, though! I don't see this one wearing down anytime s" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.2535524891"/>
+<Obs _TEXT="I bought some of these a few years ago just to try them out.  The &quot;gel&quot; in the name sounded intriguing.  These are OK, the colors are bright, but otherwise they're just standard plastic picks, which o" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.251868674"/>
+<Obs _TEXT="I've been playing the uke since before they became popular again and must confess I own a quiver full of the addictive things (ranging from plywood beaters to a solid wood art object with an electric" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.251868674"/>
+<Obs _TEXT="The previous reviews are pretty accurate, though I would add that when the Pignose cabinet is closed, it can often sound rather boxy. It sounded much clearer and cleaner when it was opened a couple of" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="useless" _TARGETVAR="Sentiment" _POST_PROB="0.2485701188"/>
+<Obs _TEXT="I've been a Fender player since I first picked up the guitar. I've used different strings from D'Darrio to Ernie Ball and now I always use Fender strings. For Stratocasters I always use Super Bullets" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.2477635482"/>
+<Obs _TEXT="When I got this I thought it was a cheap toy-like thing, but when I put it on my banjo, it perched on the head and was practically invisible to anybody else, but easy to see when I needed it.  It's re" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.2470696558"/>
+<Obs _TEXT="The these strings are fantastic. The sound is deep and heavy, which is exactly what I was looking for. Makes the bass sound pretty bad@$$. I cranked up the bass amplifier after putting on these string" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.2441625247"/>
+<Obs _TEXT="It's very thin, all parts about it are kinda thin and cheap, but it works exactly as it should. Not bad if you just need to round out an order to get free shipping. Not for your favorite guitar though" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="bad &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.2441625247"/>
+<Obs _TEXT="Does exactly what you want it to do. It even comes with these little clips for running the cable down the stand. It's easy to set up and easy to take down. If you're looking for a mic stand, buy this" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.243622069"/>
+<Obs _TEXT="I got this product to clean and condition my guitar fretboards (well duh!)  Does it work?  Yes and no.  First it did not appear that anything was coming out.  After a bit of rubbing I did notice a &amp;#3" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="useless" _TARGETVAR="Sentiment" _POST_PROB="0.2413881161"/>
+<Obs _TEXT="Just to confirm several other reviews - these hangers are really nice. They add a nice look to your room and they perform a much-needed function very well. As other have said, though, the drywall moun" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="useless" _TARGETVAR="Sentiment" _POST_PROB="0.2413881161"/>
+<Obs _TEXT="This thing is useless. Good idea, but way too light/rickety to be useful. Unless you're constantly aware of it, 99% of the time you'll end up just kicking it over when you go to put your foot on it. P" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="useless" _TARGETVAR="Sentiment" _POST_PROB="0.2413881161"/>
+<Obs _TEXT="My home practice area is in a rather dark corner with limited room, and I have this clipped onto my music stand. Illuminates the music far better than the previous ones I had used, including one that" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="useless" _TARGETVAR="Sentiment" _POST_PROB="0.2413881161"/>
+<Obs _TEXT="Very accurate tuner BUT it broke within the first week I used it.  The little head on the tuner is connected with an arm and a ball and even when  you are gently the three prongs holding the ball join" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="useless" _TARGETVAR="Sentiment" _POST_PROB="0.2413881161"/>
+<Obs _TEXT="It might just be my pickups or my strings, but if you set the bass above seven or so, the bass gets fairly fizzy on the E string. The effects loop is useless, and it removes a lot of the character fro" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="useless" _TARGETVAR="Sentiment" _POST_PROB="0.2413881161"/>
+<Obs _TEXT="The Hercules Travlite Guitar Stand is an average stand in my opinion.  It does hold up the acoustic guitar and it is very portable but I'd keep your guitar and stand out away and close to a corner, if" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.2401801272"/>
+<Obs _TEXT="WOW!!!!! this thing is fun to play with!!!this is my first delay pedal, so i cant compare it with others, but im so happy that i bought it! ive had it for about a month and played it for hours every d" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.2401801272"/>
+<Obs _TEXT="I don't know much about guitar tuners, but I am sure you can pay for a more expensive one, but this one does the job.  It was not hard to figure out how to use it, and the Fender is a happier guitar f" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.2401801272"/>
+<Obs _TEXT="I hate winding strings. I got this to help with that. It does it job very well. You can string your guitar in a fraction of the time. It could be a little tougher but as long you don't give it hell it" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hate &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.2369143312"/>
+<Obs _TEXT="I've owned a TS808 since I purchased it used in the 80s for around $20.  Yes, this is a great overdrive.  This pedal has many famous users and it has been used on many iconic recordings.  Pair this wi" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hate &amp; ~good" _TARGETVAR="Sentiment" _POST_PROB="0.2369143312"/>
+<Obs _TEXT="I bought this because after I rebuilt a guitar that was very special to me it wouldn't stay in tune. I took it to a number of guys thinking I did something wrong in the build and was just overlooking" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="wrong &amp; ~good &amp; ~price &amp; ~sound" _TARGETVAR="Sentiment" _POST_PROB="0.2332327934"/>
+<Obs _TEXT="This little music stand folds up small enough (after some disassembly) to fit in a pouch less than 2 feet tall and 2 inches wide. Once assembled, it stands straight and is more than sturdy enough for" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.2289833767"/>
+<Obs _TEXT="These are your basic speaker stands for PA systems...they're functional, durable, and can be set-up within just a few seconds. I would have given this a higher rating, however upon receipt, one of the" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.2289833767"/>
+<Obs _TEXT="After researching overdrive pedals for what seemed like forever, I chose the Fulltone OCD. The reviews on Amazon helped as well, along with Youtube demos and guitar mags. What finally made my choice f" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.2258002327"/>
+<Obs _TEXT="It's a very cute little capo. It works great on my ukulele and mandolin but of course it's hard to use because when you get into the higher frets the frets are VERY small. But it works." _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.2258002327"/>
+<Obs _TEXT="Can't beat these $10 stands! They are a bit troublesome to open and collapse, the snap buttons are hard to depress. But once open they stand up well. Since I don't travel much they are great if you us" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.2258002327"/>
+<Obs _TEXT="I'm primarily a guitar player, but I do have a decent mandolin that had factory strings on it.  Those strings made it hard to play, so I tried these D'Addario mandolin strings.  What a difference!  Th" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.2234049125"/>
+<Obs _TEXT="I seriously never knew steel guitar picks existed i've been playing guitar for like 5 years. These picks are the BOMB!, + they don't break on you when you strum too hard/fast :D, i would rate this pro" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="hard &amp; ~nice &amp; ~price &amp; ~sound &amp; ~great &amp; ~quality" _TARGETVAR="Sentiment" _POST_PROB="0.2234049125"/>
+<Obs _TEXT="These are obviously designed for microphones with the Shure SM-57/58 series form factor. I use mine for the much heavierBlue Microphones enCORE 100 Studio-Grade Dynamic Performance Microphone, and thi" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="base" _TARGETVAR="Sentiment" _POST_PROB="0.2133985059"/>
+<Obs _TEXT="Purchased this to replace the Dampit as a no drip alternative. With the solid base it will not drip and it fairly easy to use. Distilled water will extend the life of the sponge. Overall simple and ef" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="base" _TARGETVAR="Sentiment" _POST_PROB="0.2124808931"/>
+<Obs _TEXT="I'm a beginner and I try to learn to play guitar. I was looking for many different capo's but this one was my choice base on other folks review. Is easy to apply small and sexy ;-)" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="base" _TARGETVAR="Sentiment" _POST_PROB="0.2124808931"/>
+<Obs _TEXT="I like mic stands with folding legs (like this) as opposed to weighted bases, since they're easier to travel with.  Quality-wise, this stand feels solid, but not amazing &amp;#8211; it's a mixture of plas" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="base" _TARGETVAR="Sentiment" _POST_PROB="0.2124808931"/>
+<Obs _TEXT="I feared that this stand was not big enough for my guitarr&amp;oacute;n which is at least as big as, but much thicker than, a cello. But its design appeared amenable to some home-modification that might m" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Validate" _WHY="base" _TARGETVAR="Sentiment" _POST_PROB="0.2124808931"/>
+<Obs _TEXT="You get what you pay for. This is a no-nonsense cheap guitar stand. Its adjustable, padded, and has a nifty rubber band that holds the neck of your axe so when you, a stage groupie, or your clumsy dru" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEGATIVE" _PARTITION="Training" _WHY="nifty" _TARGETVAR="Sentiment" _POST_PROB="0.206107101"/>
+<Obs _TEXT="I picked up this Behringer CT100 cable tester because it takes the guesswork out of maintaining a cable collection. The unit does its job very well and it helped me find several bad cables that I prev" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEUTRAL" _PARTITION="Training" _WHY="tester" _TARGETVAR="Sentiment" _POST_PROB="0.1943776967"/>
+<Obs _TEXT="Solidly built, small tester that can easily be carried around in a gig bag.  There isn't really much in the way of instructions, but the LEDs are fairly well labeled and straight forward enough to fig" _TARGET="POSITIVE" _ORGTARGET="POSITIVE" _PREDTARGET="NEUTRAL" _PARTITION="Training" _WHY="tester" _TARGETVAR="Sentiment" _POST_PROB="0.1807822052"/>
+</Data>
+<Metadata>
+<Variable NAME="_Text" LABEL="Text" LENGTH="200" FORMAT="$200." TYPE="C"/>
+<Variable NAME="_Target" LABEL="Assigned Target" LENGTH="32" FORMAT="" TYPE="C"/>
+<Variable NAME="_orgTarget" LABEL="Original Target" LENGTH="32" FORMAT="" TYPE="C"/>
+<Variable NAME="_PredTarget" LABEL="Predicted Target" LENGTH="32" FORMAT="" TYPE="C"/>
+<Variable NAME="_partition" LABEL="Data Partition" LENGTH="16" FORMAT="" TYPE="C"/>
+<Variable NAME="_why" LABEL="Why Classified" LENGTH="400" FORMAT="" TYPE="C"/>
+<Variable NAME="_targetVar" LABEL="Target Variable" LENGTH="32" FORMAT="" TYPE="C"/>
+<Variable NAME="_post_prob" LABEL="Posterior Probability" LENGTH="8" FORMAT="PERCENT8.1" TYPE="N"/>
+</Metadata>
+</TRCHANGE>
+<EMNOTES Type="EXTERNAL" Extension="txt">
+<Data/>
+</EMNOTES>
+</EmFileProperties>
+</PROPERTIES>
+</NODE>
+</NODES>
+<CONNECTIONS>
+<CONNECTION FROM="Part" TO="TextParsing"/>
+<CONNECTION FROM="TextParsing" TO="TextFilter"/>
+<CONNECTION FROM="TextFilter" TO="TextRule"/>
+<CONNECTION FROM="FIMPORT" TO="Part"/>
+</CONNECTIONS>
+<NOTES>
+<DATA><![CDATA[
+
+]]>
+</DATA>
+</NOTES>
+</Workspace>
+</_ROOT_>
